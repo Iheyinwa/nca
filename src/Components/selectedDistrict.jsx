@@ -46,6 +46,7 @@ const SelectedDistrict = ({ text }) => {
   const handleSuccessYes = () => {
     setShowSuccess(false);
     navigate("/vote");
+    window.location.reload();
   };
 
   const handleSuccessNo = () => {
@@ -53,11 +54,18 @@ const SelectedDistrict = ({ text }) => {
     navigate("/");
   };
 
+  const handleBackButtonClick = () => {
+    window.location.reload();
+  };
+
   return (
     <>
       <div className="flex flex-col justify-center items-center mt-10 w-full">
         <div className="flex w-full items-center">
-          <div className="bg-[#49097B] justify-self-start rounded-full p-3">
+          <div
+            className="bg-[#49097B] justify-self-start rounded-full p-3 cursor-pointer"
+            onClick={handleBackButtonClick}
+          >
             <FaArrowLeft color="white" size={25} />
           </div>
           <p className="font-syne leading-[65px] font-bold text-[30px] md:text-[59px] mx-auto">

@@ -4,7 +4,7 @@ const StepsCard = ({count, content}) => {
   return (
     <div>
       <p className="font-syne font-bold text-[29px] leading-[65px]">Step {count}</p>
-      <p className="font-poppins text-[21px] leading-[27px]">
+      <p className="font-poppins text-lg md:text-[21px] leading-[27px]">
         {content}
       </p>
     </div>

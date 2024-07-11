@@ -65,7 +65,7 @@ export default function Root() {
           </div>
         </section>
         {menu && (
-          <section className="fixed inset-0 flex items-center justify-end bg-black bg-opacity-50">
+          <section className="fixed inset-0 flex items-center justify-end bg-black bg-opacity-50 z-10">
             <div className="bg-white flex flex-col gap-2 w-[50%] h-full p-4">
               <div
                 className="justify-end flex cursor-pointer"
@@ -81,7 +81,7 @@ export default function Root() {
                     className={({ isActive }) =>
                       `text-xl ${
                         link.color
-                      } text-white text-[22px] font-medium font-poppins p-4 rounded-[20px] ${
+                      } text-white text-[18px] font-medium font-poppins p-4 rounded-[20px] ${
                         isActive ? "" : ""
                       }`
                     }

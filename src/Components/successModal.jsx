@@ -19,7 +19,12 @@ const SuccessModal = ({handleSuccessYes, handleSuccessNo}) => {
             Congratulations! You have cast your vote
           </p>
         </div>
-        <div className="bg-[#49097B] flex flex-col justify-center items-center p-4 rounded-[10px]">
+        <div
+          className="bg-[#49097B] flex flex-col justify-center items-center p-4 rounded-[10px]"
+          style={{
+            boxShadow: "0px 10px 4px 0px #00000040",
+          }}
+        >
           <p className="font-poppins font-semibold md:text-2xl text-white lg:leading-[65px] my-2 text-center">
             Would you like to vote again?
           </p>
