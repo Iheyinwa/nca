@@ -42,7 +42,7 @@ export default function Root() {
             />
           </Link>
         </div>
-        <ul className="hidden md:flex justify-end items-center gap-6 bg-[#000814] w-full h-full p-4">
+        <ul className="hidden md:flex justify-end items-center gap-6 bg-[#000814] rounded-r-[10px] w-full h-full p-4">
           {links.map((link, index) => (
             <NavLink
               key={index}
@@ -59,7 +59,7 @@ export default function Root() {
             </NavLink>
           ))}
         </ul>
-        <section className="bg-[#000814] w-full h-full p-4 flex md:hidden justify-end">
+        <section className="bg-[#000814] rounded-l-[10px] w-full h-full p-4 flex md:hidden justify-end">
           <div onClick={handleMenu} className="cursor-pointer ">
             <IoMenu color="white" size={50} />
           </div>

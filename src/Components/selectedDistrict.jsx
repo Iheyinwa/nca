@@ -4,7 +4,13 @@ import DistrictCard from "./districtCard";
 import { useState } from "react";
 import VotingModal from "./votingModal";
 import SuccessModal from "./successModal";
+import PaystackPop from "@paystack/inline-js";
 import { useNavigate } from "react-router-dom";
+import { db } from "../firebase"; // Assuming you have your Firebase setup here
+import {
+  addDoc,
+  collection,
+} from "firebase/firestore";
 
 const districts = [
   {
@@ -25,18 +31,13 @@ const SelectedDistrict = ({ text }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [selectedDistrictIndex, setSelectedDistrictIndex] = useState(null);
-
+  const [, setFormData] = useState({});
   const navigate = useNavigate();
 
   const handleVoting = (index) => {
     console.log(`clicked ${index}`);
     setSelectedDistrictIndex(index);
     setShowPopup(true);
-  };
-
-  const handlePopupSubmit = () => {
-    setShowPopup(false);
-    setShowSuccess(true);
   };
 
   const handlePopupCancel = () => {
@@ -56,6 +57,50 @@ const SelectedDistrict = ({ text }) => {
 
   const handleBackButtonClick = () => {
     window.location.reload();
+  };
+
+  const onSubmit = async (data) => {
+    const formData = {
+      ...data,
+      [text]: {
+        vote: data.amount/50,
+        church: districts[selectedDistrictIndex].name
+      },
+    };
+
+    setFormData(formData);
+    console.log(`Data: ${JSON.stringify(formData)}`);
+
+    const paystackKey = import.meta.env.VITE_PUBLIC_KEY;
+    const paystack = new PaystackPop();
+    setShowPopup(false);
+
+    paystack.newTransaction({
+      key: paystackKey,
+      email: data.email,
+      amount: data.amount * 100,
+      onSuccess: async (transaction) => {
+        console.log(`Payment successful reference ${transaction.reference}`);
+        setShowSuccess(true);
+
+        // Update Firebase
+        try {
+          const districtDataRef = await addDoc(collection(db, "districtData"), {
+            districtData: formData,
+          });
+          console.log("District Data written with ID: ", districtDataRef.id);
+        
+         
+        } catch (e) {
+          console.error("Error submitting information: ", e);
+         
+        } 
+      },
+      onCancel: () => {
+        console.log("Transaction was not completed");
+        setShowSuccess(false);
+      },
+    });
   };
 
   return (
@@ -87,7 +132,7 @@ const SelectedDistrict = ({ text }) => {
         <VotingModal
           index={selectedDistrictIndex}
           handlePopupCancel={handlePopupCancel}
-          handlePopupSubmit={handlePopupSubmit}
+          onSubmit={onSubmit}
         />
       )}
       {showSuccess && (

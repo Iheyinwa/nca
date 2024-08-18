@@ -1,12 +1,25 @@
 import PropTypes from "prop-types";
 import InputField from "./inputField";
 import { FaTimes } from "react-icons/fa";
+import { useState } from "react";
 
-const VotingModal = ({ handlePopupSubmit, handlePopupCancel}) => {
+const VotingModal = ({onSubmit, handlePopupCancel}) => {
+  const [email, setEmail] = useState("");
+  const [amount, setAmount] = useState("");
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = { email, amount };
+    console.log(data)
+    onSubmit(data);
+  };
+
+
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 px-4">
-      <div
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 px-4 h-full">
+      <form onSubmit={handleSubmit}
         className="bg-white p-8 rounded shadow-md flex flex-col"
         style={{
           boxShadow: "0px 10px 4px 0px #00000040",
@@ -22,11 +35,14 @@ const VotingModal = ({ handlePopupSubmit, handlePopupCancel}) => {
           <InputField
             type="tel"
             title="Phone"
+            // onChange={(e) => setPhoneNumber(e.target.value)}
+
             // props={{ ...register("firstName") }}
           />
           <InputField
             type="email"
             title="Email Address"
+            onChange={(e) => setEmail(e.target.value)}
             // props={{ ...register("firstName") }}
           />
           {/* {errors.firstName && <Error error={errors.firstName.message} />} */}
@@ -34,25 +50,26 @@ const VotingModal = ({ handlePopupSubmit, handlePopupCancel}) => {
             type="text"
             title="Amount"
             note="(₦50 per vote)"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+
             // props={{ ...register("firstName") }}
           />
         </div>
-        <div className="w-full">
           <button
-            onClick={handlePopupSubmit}
-            className="bg-[#49097B] text-white font-semibold py-2 px-4 rounded mr-2 text-xl md:text-[30px] w-full font-inter"
+            
+            className="bg-[#49097B] text-white font-semibold py-2 px-4 rounded text-xl md:text-[30px] w-full font-inter"
           >
             Pay Now
           </button>
-        </div>
-      </div>
+      </form>
     </div>
   );
 };
 
 
 VotingModal.propTypes = {
-  handlePopupSubmit: PropTypes.func,
+  onSubmit: PropTypes.func,
   handlePopupCancel: PropTypes.func
 };
 export default VotingModal;
