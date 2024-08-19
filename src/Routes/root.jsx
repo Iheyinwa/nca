@@ -16,6 +16,7 @@ export default function Root() {
       name: "Live Results",
       color: "bg-[#49097B]",
     },
+
   ];
 
   const [menu, setShowMenu] = useState(false);

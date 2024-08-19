@@ -6,6 +6,8 @@ import './index.css'
 import Vote from './Pages/vote.jsx';
 import LiveResults from './Pages/liveResults.jsx';
 import Root from './Routes/root.jsx';
+import SignIn from './Pages/admin/auth/signIn.jsx';
+import Dashboard from './Pages/admin/dashboard.jsx';
 
 
 const router = createBrowserRouter([
@@ -24,6 +26,14 @@ const router = createBrowserRouter([
       {
         path: "liveResults",
         element: <LiveResults />,
+      },
+      {
+        path: "admin/signIn",
+        element: <SignIn />,
+      },
+      {
+        path: "admin/dashboard",
+        element: <Dashboard />,
       },
     ],
   },

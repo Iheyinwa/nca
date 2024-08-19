@@ -7,10 +7,7 @@ import SuccessModal from "./successModal";
 import PaystackPop from "@paystack/inline-js";
 import { useNavigate } from "react-router-dom";
 import { db } from "../firebase"; // Assuming you have your Firebase setup here
-import {
-  addDoc,
-  collection,
-} from "firebase/firestore";
+import { doc, setDoc, increment } from "firebase/firestore";
 
 const districts = [
   {
@@ -61,11 +58,9 @@ const SelectedDistrict = ({ text }) => {
 
   const onSubmit = async (data) => {
     const formData = {
-      ...data,
-      [text]: {
-        vote: data.amount/50,
-        church: districts[selectedDistrictIndex].name
-      },
+      amount: data.amount,
+      votes: data.amount / 50,
+      church: districts[selectedDistrictIndex].name,
     };
 
     setFormData(formData);
@@ -74,6 +69,12 @@ const SelectedDistrict = ({ text }) => {
     const paystackKey = import.meta.env.VITE_PUBLIC_KEY;
     const paystack = new PaystackPop();
     setShowPopup(false);
+
+    const cleanedText = text.replace(/\s+/g, "");
+    const cleanedChurchName = districts[selectedDistrictIndex].name.replace(
+      /\s+/g,
+      ""
+    );
 
     paystack.newTransaction({
       key: paystackKey,
@@ -85,16 +86,28 @@ const SelectedDistrict = ({ text }) => {
 
         // Update Firebase
         try {
-          const districtDataRef = await addDoc(collection(db, "districtData"), {
-            districtData: formData,
-          });
-          console.log("District Data written with ID: ", districtDataRef.id);
-        
-         
+          const districtRef = doc(db, "districtData", cleanedText);
+          const churchRef = doc(districtRef, "churches", cleanedChurchName);
+
+          // Create or update the district document
+          await setDoc(districtRef, {}, { merge: true });
+
+          // Update or create the church document
+          await setDoc(
+            churchRef,
+            {
+              amount: increment(data.amount),
+              votes: increment(data.amount / 50),
+            },
+            { merge: true }
+          );
+
+          console.log(
+            `Updated ${districts[selectedDistrictIndex].name} in ${cleanedText} district`
+          );
         } catch (e) {
-          console.error("Error submitting information: ", e);
-         
-        } 
+          console.error("Error updating information: ", e);
+        }
       },
       onCancel: () => {
         console.log("Transaction was not completed");
@@ -146,7 +159,7 @@ const SelectedDistrict = ({ text }) => {
 };
 
 SelectedDistrict.propTypes = {
-  text: PropTypes.string,
+  text: PropTypes.string.isRequired,
 };
 
 export default SelectedDistrict;
