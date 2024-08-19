@@ -79,7 +79,7 @@ const LiveResults = () => {
             options={options}
             styles={customStyles}
             className="w-full text-center font-syne font-semibold text-[#040000] text-[20px] md:text-[30px] lg:text-[32px] lg:leading-[65px] mb-10 h-full"
-            placeholder="Please Select..."
+            placeholder="Please Select...."
             onChange={handleChange}
           />
         </>
