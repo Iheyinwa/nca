@@ -7,7 +7,6 @@ const VotingModal = ({onSubmit, handlePopupCancel}) => {
   const [email, setEmail] = useState("");
   const [amount, setAmount] = useState("");
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = { email, amount };
@@ -28,32 +27,22 @@ const VotingModal = ({onSubmit, handlePopupCancel}) => {
         <div className="self-end cursor-pointer" onClick={handlePopupCancel}>
           <FaTimes className="text-red-700" size={24} />
         </div>
-        <p className="font-syne font-bold text-lg md:text-2xl lg:text-[32px] text-[#0D0000]">
-          Enter your contact details
+        <p className="font-syne font-bold text-lg md:text-2xl lg:text-[32px] text-[#0D0000] py-2">
+          The more votes you give <br/>the higher the chances of winning
         </p>
         <div className="my-2">
-          <InputField
-            type="tel"
-            title="Phone"
-            // onChange={(e) => setPhoneNumber(e.target.value)}
-
-            // props={{ ...register("firstName") }}
-          />
           <InputField
             type="email"
             title="Email Address"
             onChange={(e) => setEmail(e.target.value)}
-            // props={{ ...register("firstName") }}
           />
-          {/* {errors.firstName && <Error error={errors.firstName.message} />} */}
+
           <InputField
             type="text"
             title="Amount"
             note="(₦50 per vote)"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-
-            // props={{ ...register("firstName") }}
           />
         </div>
           <button

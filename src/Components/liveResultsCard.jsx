@@ -72,9 +72,14 @@ const LiveResultsCard = ({ text }) => {
                   <p className="font-semibold text-xl md:text-[40px] text-center md:leading-[65px] font-poppins">
                     {district.church}
                   </p>
-                  <div className="border border-black w-full"></div>
+                  <div
+                    className="border w-full"
+                    style={{
+                      borderColor: getRandomColor(),
+                    }}
+                  ></div>
                   <p className="font-semibold text-xl md:text-[40px] text-center md:leading-[65px] font-poppins">
-                    {district.votes}
+                    {district.votes} votes
                   </p>
                 </div>
               </div>
@@ -82,29 +87,6 @@ const LiveResultsCard = ({ text }) => {
           </div>
         ))
       )}
-      {/* {newDistricts.map((district, index) => (
-        <div key={index}>
-          {district && (
-            <div
-              className="rounded-[10px] flex flex-col justify-center items-center border-2 w-full py-4 my-5"
-              style={{
-                boxShadow: "0px 4px 4px 0px #00000040",
-                borderColor: getRandomColor(),
-              }}
-            >
-              <div className="w-[80%] md:w-[50%] flex flex-col justify-center items-center gap-3">
-                <p className="font-semibold text-xl md:text-[40px] text-center md:leading-[65px] font-poppins">
-                  {district.church}
-                </p>
-                <div className="border border-black w-full"></div>
-                <p className="font-semibold text-xl md:text-[40px] text-center md:leading-[65px] font-poppins">
-                  {district.votes}
-                </p>
-              </div>
-            </div>
-          )}
-        </div>
-      ))} */}
     </section>
   );
 };

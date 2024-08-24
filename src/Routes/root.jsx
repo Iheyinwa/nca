@@ -14,9 +14,9 @@ export default function Root() {
     {
       route: "/liveResults",
       name: "Live Results",
-      color: "bg-[#49097B]",
+      color: "bg-[#FF4545]",
+      shadow: true
     },
-
   ];
 
   const [menu, setShowMenu] = useState(false);
@@ -51,7 +51,7 @@ export default function Root() {
               className={({ isActive }) =>
                 `text-xl ${
                   link.color
-                } text-white text-[22px] font-medium font-poppins p-4 rounded-[20px] ${
+                } text-white ${link.shadow ? 'live' : ''} text-[22px] font-semibold font-syne p-4 rounded-[10px] ${
                   isActive ? "" : ""
                 }`
               }
@@ -82,7 +82,7 @@ export default function Root() {
                     className={({ isActive }) =>
                       `text-xl ${
                         link.color
-                      } text-white text-[18px] font-medium font-poppins p-4 rounded-[20px] ${
+                      } text-white text-[18px] font-semibold font-syne p-4 rounded-[10px] ${
                         isActive ? "" : ""
                       }`
                     }

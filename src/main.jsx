@@ -6,8 +6,9 @@ import './index.css'
 import Vote from './Pages/vote.jsx';
 import LiveResults from './Pages/liveResults.jsx';
 import Root from './Routes/root.jsx';
-import SignIn from './Pages/admin/auth/signIn.jsx';
 import Dashboard from './Pages/admin/dashboard.jsx';
+import AdminRoot from './Pages/admin/adminRoot.jsx';
+import Districts from './Pages/admin/districts.jsx';
 
 
 const router = createBrowserRouter([
@@ -27,13 +28,19 @@ const router = createBrowserRouter([
         path: "liveResults",
         element: <LiveResults />,
       },
+    ],
+  },
+  {
+    path: "admin",
+    element: <AdminRoot />,
+    children: [
       {
-        path: "admin/signIn",
-        element: <SignIn />,
+        path: "/admin",
+        element: <Dashboard />,
       },
       {
-        path: "admin/dashboard",
-        element: <Dashboard />,
+        path: "/admin/addDistricts",
+        element: <Districts />,
       },
     ],
   },

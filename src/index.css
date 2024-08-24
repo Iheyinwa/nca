@@ -6,6 +6,50 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+   background-color: #000;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+button,
+a,
+ul,
+span, label
+{
+   color: #FFF;
+}
+
+.animate-spin {
+   animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+   from {
+      transform: rotate(0deg);
+   }
+   to {
+      transform: rotate(360deg);
+   }
+}
+
+button{
+   transition: 0.4s;
+}
+button:hover, .live:hover {
+ box-shadow: 7px 5px 56px -14px #C3D900;
+}
+
+button:active{
+ transform: scale(0.97);
+ box-shadow: 7px 5px 56px -10px #C3D900;
+}
 /* *{
     outline: 1px solid red;
 } */

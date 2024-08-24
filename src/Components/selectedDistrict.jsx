@@ -9,27 +9,14 @@ import { useNavigate } from "react-router-dom";
 import { db } from "../firebase"; // Assuming you have your Firebase setup here
 import { doc, setDoc, increment } from "firebase/firestore";
 
-const districts = [
-  {
-    name: "Church One",
-    title: "One",
-  },
-  {
-    name: "Church Two",
-    title: "Two",
-  },
-  {
-    name: "Church Three",
-    title: "Three",
-  },
-];
-
-const SelectedDistrict = ({ text }) => {
+const SelectedDistrict = ({ text, churches }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [selectedDistrictIndex, setSelectedDistrictIndex] = useState(null);
   const [, setFormData] = useState({});
   const navigate = useNavigate();
+
+  console.log(churches);
 
   const handleVoting = (index) => {
     console.log(`clicked ${index}`);
@@ -60,7 +47,7 @@ const SelectedDistrict = ({ text }) => {
     const formData = {
       amount: data.amount,
       votes: data.amount / 50,
-      church: districts[selectedDistrictIndex].name,
+      church: churches[selectedDistrictIndex], // Adjusted to handle strings
     };
 
     setFormData(formData);
@@ -71,7 +58,7 @@ const SelectedDistrict = ({ text }) => {
     setShowPopup(false);
 
     const cleanedText = text.replace(/\s+/g, "");
-    const cleanedChurchName = districts[selectedDistrictIndex].name.replace(
+    const cleanedChurchName = churches[selectedDistrictIndex].replace(
       /\s+/g,
       ""
     );
@@ -96,6 +83,7 @@ const SelectedDistrict = ({ text }) => {
           await setDoc(
             churchRef,
             {
+              name: cleanedChurchName, // Include name in the document
               amount: increment(data.amount),
               votes: increment(data.amount / 50),
             },
@@ -103,7 +91,7 @@ const SelectedDistrict = ({ text }) => {
           );
 
           console.log(
-            `Updated ${districts[selectedDistrictIndex].name} in ${cleanedText} district`
+            `Updated ${cleanedChurchName} in ${cleanedText} district`
           );
         } catch (e) {
           console.error("Error updating information: ", e);
@@ -131,10 +119,10 @@ const SelectedDistrict = ({ text }) => {
           </p>
         </div>
         <section className="w-full grid grid-cols-1 md:grid-cols-2 items-center gap-3 my-4">
-          {districts.map((district, index) => (
+          {churches.map((church, index) => (
             <div key={index}>
               <DistrictCard
-                name={district.name}
+                name={church} // Display the string directly
                 onClick={() => handleVoting(index)}
               />
             </div>
@@ -160,6 +148,7 @@ const SelectedDistrict = ({ text }) => {
 
 SelectedDistrict.propTypes = {
   text: PropTypes.string.isRequired,
+  churches: PropTypes.arrayOf(PropTypes.string).isRequired, // Adjusted to handle array of strings
 };
 
 export default SelectedDistrict;
