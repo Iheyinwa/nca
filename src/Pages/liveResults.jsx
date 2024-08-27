@@ -50,14 +50,15 @@ const LiveResults = () => {
 
   return (
     <section>
-      <section className="flex justify-center items-center absolute w-full bg-[#000012] h-[300px] my-6">
-        <p className="text-white font-syne text-[32px] lg:text-[59px] leading-[65px] font-bold">
-          Results
+      <section className="flex justify-center items-center mx-4 lg:mx-10 bg-[#000] h-[300px] lg:h-[500px] rounded-[10px]">
+        <p className="text-white relative flex justify-center items-center pl-6 font-poppins text-[32px] lg:text-[59px] leading-[65px] font-bold viewLive">
+          Live Results
         </p>
       </section>
-      <section className="flex flex-col justify-center gap-4 relative top-[30rem] items-center w-[90%] lg:w-[80%] xl:w-[50%] mx-auto">
+      <section className="flex flex-col justify-center gap-4 items-center w-[90%] lg:w-[80%] xl:w-[50%] mx-auto">
         <>
-          <p className="font-syne leading-[65px] text-center font-bold text-2xl md:text-[30px] lg:text-[59px]">
+          <div className="lg:h-[100px]"></div>
+          <p className="font-syne leading-[65px] text-center font-bold text-[22px] md:text-[24px] lg:text-[48px]">
             Choose your District
           </p>
           <Select

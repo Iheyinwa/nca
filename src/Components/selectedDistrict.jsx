@@ -109,7 +109,7 @@ const SelectedDistrict = ({ text, churches }) => {
       <div className="flex flex-col justify-center items-center mt-10 w-full">
         <div className="flex w-full items-center">
           <div
-            className="bg-[#49097B] justify-self-start rounded-full p-3 cursor-pointer"
+            className="bg-[#000] justify-self-start rounded-full p-3 cursor-pointer"
             onClick={handleBackButtonClick}
           >
             <FaArrowLeft color="white" size={25} />

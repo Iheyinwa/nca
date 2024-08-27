@@ -5,7 +5,7 @@ const DistrictCard = ({name, onClick}) => {
 
 
   return (
-    <div className="bg-[#49097B] rounded-[14px] w-full h-fit flex justify-evenly px-4 md:justify-center gap-3 items-center py-4 cursor-pointer" onClick={onClick}>
+    <div className="bg-[#000] rounded-[14px] w-full h-fit flex justify-evenly px-4 md:justify-center gap-3 items-center py-4 cursor-pointer" onClick={onClick}>
       <div className="rounded-[19px] w-32 h-32">
         <img
           src={Logo}

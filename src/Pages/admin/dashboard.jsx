@@ -124,16 +124,15 @@ const Dashboard = () => {
   return (
     <section>
       <TotalEarnings />
-      <hr />
 
       <section className="m-4 p-4">
         <p className="font-bold text-3xl font-syne py-2">Trending Districts</p>
         <TrendingDistricts />
       </section>
 
-      <hr className="my-4" />
-
+      <div className="h-[100px]"></div>
       <section className="m-4 p-4">
+
         <div>
           <p className="my-4 font-syne text-4xl font-bold">Voting Table</p>
           <Select

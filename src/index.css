@@ -1,30 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap');
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body{
-   background-color: #000;
-}
 
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-li,
-button,
-a,
-ul,
-span, label
-{
-   color: #FFF;
-}
 
 .animate-spin {
    animation: spin 2s linear infinite;
@@ -39,17 +20,155 @@ span, label
    }
 }
 
-button{
-   transition: 0.4s;
-}
-button:hover, .live:hover {
- box-shadow: 7px 5px 56px -14px #C3D900;
+
+#navbarbg{
+    backdrop-filter: blur(8px) saturate(200%);
+    -webkit-backdrop-filter: blur(8px) saturate(200%);
+    background-color: rgba(255, 255, 255, 0.59);
 }
 
-button:active{
- transform: scale(0.97);
- box-shadow: 7px 5px 56px -10px #C3D900;
+#primaryButton{
+ position: relative;
+ overflow: hidden;
+  z-index: 1;
+  border-radius: 15px;
+  padding: 20px 10px;
+  display: flex;
+  gap: 5px;
+  width: fit-content;
+  justify-items: center;
+  align-items: center;
 }
-/* *{
-    outline: 1px solid red;
+
+
+
+#voteButton:hover, .viewLive:hover, #more:hover, .blackButtons:hover {
+  transform: scale(1.02);
+}
+
+#voteButton{
+background-color: white;
+color: black;
+}
+
+
+
+/* #primaryButton:after {
+ content: "";
+ background-color: #FF1010;
+ position: absolute;
+ z-index: -1;
+ left: -20%;
+ right: -20%;
+ top: 0;
+ bottom: 0;
+ transform: skewX(-45deg) scale(0, 1);
+ transition: all 0.5s;
 } */
+#navbarButton:after {
+ content: "";
+ background-color: white;
+ position: absolute;
+ z-index: -1;
+ left: -20%;
+ right: -20%;
+ top: 0;
+ bottom: 0;
+ transform: skewX(-45deg) scale(0, 1);
+ transition: all 0.5s;
+}
+
+#primaryButton:hover:after, #navbarButton:hover:after {
+ transform: skewX(-45deg) scale(1, 1);
+ -webkit-transition: all 0.5s;
+ transition: all 0.5s;
+}
+
+.viewLive::before, #primaryButton::before {
+   width: 18px;
+   height: 18px;
+}
+
+.viewLive::after, #primaryButton::after {
+  width: 18px;
+  height: 18px;
+  animation: pulse 1s linear infinite;
+}
+
+.viewLive::before, #navbarButton::before,
+.viewLive::after, #navbarButton::after {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  left: 0px;
+  background-color: white;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+.vote, .vote:hover{
+   border-bottom: 1px solid #FF4545;
+   transition: .4s ease;
+}
+
+#more{
+   float: right;
+   margin: 20px 0;
+   font-size: 18px;
+   width: fit-content;
+}
+
+.blob {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  opacity: 1;
+  filter: blur(12px);
+  animation: blob-bounce 5s infinite ease;
+}
+
+@keyframes blob-bounce {
+  0% {
+    transform: translate(-100%, -100%) translate3d(0, 0, 0);
+  }
+
+  25% {
+    transform: translate(-100%, -100%) translate3d(100%, 0, 0);
+  }
+
+  50% {
+    transform: translate(-100%, -100%) translate3d(100%, 100%, 0);
+  }
+
+  75% {
+    transform: translate(-100%, -100%) translate3d(0, 100%, 0);
+  }
+
+  100% {
+    transform: translate(-100%, -100%) translate3d(0, 0, 0);
+  }
+}
+
+.svgIcon {
+  width: 30px;
+}
+
+.svgIcon path {
+  fill: white;
+}

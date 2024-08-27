@@ -9,13 +9,14 @@ export default function Root() {
     {
       route: "/vote",
       name: "Vote",
-      color: "bg-[#000814]",
+      text: "text-black",
     },
     {
       route: "/liveResults",
       name: "Live Results",
-      color: "bg-[#FF4545]",
-      shadow: true
+      color: "bg-transparent",
+      text: "text-black",
+      id: true,
     },
   ];
 
@@ -31,28 +32,34 @@ export default function Root() {
 
   return (
     <section>
-      <section className="flex justify-between items-center mx-4 md:mx-12 lg:mx-auto my-4 lg:w-[80%]">
-        <div className="w-fit h-fit">
-          <Link to={"/"}>
+      <section
+        id="navbarbg"
+        className="flex justify-between items-center p-1 my-6  mx-auto w-[80%] rounded-[15px] border-[white] border shadow-lg "
+        style={{
+       
+          backdropFilter: 'blur(6px)'
+        }}
+      >
+        <Link to={"/"} className="inline-flex items-center">
+          <div className="w-16 h-16 rounded-full">
             <img
               src={Logo}
               alt="NCA"
-              width={500}
-              height={500}
-              className="text-white w-full h-full"
+              width={100}
+              height={100}
+              className=" rounded-full w-full h-full object-cover"
             />
-          </Link>
-        </div>
-        <ul className="hidden md:flex justify-end items-center gap-6 bg-[#000814] rounded-r-[10px] w-full h-full p-4">
+          </div>
+        </Link>
+        <ul className="hidden md:flex justify-end items-center gap-6 rounded-r-[10px]">
           {links.map((link, index) => (
             <NavLink
               key={index}
+              id={link.id && "primaryButton"}
               to={link.route}
               className={({ isActive }) =>
-                `text-xl ${
-                  link.color
-                } text-white ${link.shadow ? 'live' : ''} text-[22px] font-semibold font-syne p-4 rounded-[10px] ${
-                  isActive ? "" : ""
+                `font-poppins ${link.color} ${link.text} hover:border-b-[#D7770D] font-semibold${
+                  isActive ? "vote" : ""
                 }`
               }
             >
@@ -60,9 +67,9 @@ export default function Root() {
             </NavLink>
           ))}
         </ul>
-        <section className="bg-[#000814] rounded-l-[10px] w-full h-full p-4 flex md:hidden justify-end">
+        <section className="bg-[#fff] rounded-l-[10px] w-full h-full p-4 flex md:hidden justify-end">
           <div onClick={handleMenu} className="cursor-pointer ">
-            <IoMenu color="white" size={50} />
+            <IoMenu color="black" size={30} />
           </div>
         </section>
         {menu && (
@@ -78,12 +85,13 @@ export default function Root() {
                 {links.map((link, index) => (
                   <NavLink
                     key={index}
+                    id={link.id && "navbarButton"}
                     to={link.route}
                     className={({ isActive }) =>
-                      `text-xl ${
-                        link.color
-                      } text-white text-[18px] font-semibold font-syne p-4 rounded-[10px] ${
-                        isActive ? "" : ""
+                      `text-xl ${link.color} ${
+                        link.text
+                      } text-[18px] font-semibold font-syne p-3 ${
+                        isActive ? "vote" : ""
                       }`
                     }
                   >

@@ -1,41 +1,55 @@
-import Logo from "../Assets/Images/NCA_HomeHero.png";
-import HomeButton from "./homeButton";
+// import Logo from "../Assets/Images/NCA_HomeHero.png";
+// import HomeButton from "./homeButton";
 
 const HomeHero = () => {
   return (
-    <section className="flex justify-end items-center">
-      <div className="flex lg:justify-between flex-col lg:flex-row lg:items-center md:w-[95%] lg:w-[90%] lg:gap-10">
-        <section className="w-[93%] lg:w-[50%]">
-          <p className="font-syne leading-[58px] text-[32px] md:text-[50px] font-extrabold">
+    <section className="flex lg:flex-row flex-col justify-center items-center gap-4  p-4 hero mx-4 rounded-[10px] lg:mx-10 h-screen">
+      <div className="flex justify-center flex-col items-center w-full lg:w-1/2 h-full ">
+        <section className="w-full">
+          <p className=" leading-[58px] text-center lg:leading-[88px] text-4xl md:text-9xl font-extrabold font-poppins w-full ">
+            IT&apos;S{" "}
+            <span className="">
+              TIME <div className="bg-[#D77709] w-full my-2 h-2"
+              style={{
+                backdropFilter: 'blur(4px)'
+              }}
+              ></div>
+            </span>
+          </p>
+          <p className=" lg:leading-[88px]  text-center text-2xl md:text-4xl font-poppins">
             Cast Your Vote; Follow The Results
           </p>
-          <div className="flex justify-start gap-4 items-center w-full my-6">
+          {/* <p className=" leading-[58px] text-center text-white text-4xl md:text-6xl font-extrabold ">
+            Follow The Results
+          </p> */}
+          {/* <div className="flex justify-center gap-4 items-center w-full my-6">
             <HomeButton
               text={"Vote"}
-              color={"bg-[#000814]"}
-              border={"border-[#000814]"}
+              color={"bg-[#000]"}
+              border={"border-[#000]"}
               textColor={"text-white"}
-              route={'vote'}
+              route={"vote"}
+              id={"voteButton"}
             />
             <HomeButton
               text={"Live Results"}
-              border={"border-[#040EFF]"}
-              textColor={"text-[#040EFF]"}
-              route={'liveResults'}
-              
+              border={"border-[#FF1010]"}
+              textColor={"text-[#FF1010]"}
+              route={"liveResults"}
+              id="primaryButton"
             />
-          </div>
+          </div> */}
         </section>
-        <div className="w-full lg:w-fit h-fit ml-4 md:ml-0">
-          <img
-            src={Logo}
-            alt="NCA"
-            width={500}
-            height={500}
-            className="text-white w-full h-full"
-          />
-        </div>
       </div>
+      {/* <div className="w-full lg:w-1/2 h-full mx-auto">
+        <img
+          src={Logo}
+          alt="NCA"
+          width={200}
+          height={200}
+          className="text-white w-fit h-fit"
+        />
+      </div> */}
     </section>
   );
 };

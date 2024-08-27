@@ -11,6 +11,7 @@ const InputField = ({ type, title, props, onChange, note }) => {
         className="border border-[#000000C4] font-syne rounded-[5px] h-[50px] p-2"
         {...props}
         onChange={onChange}
+        required
       />
     </div>
   );

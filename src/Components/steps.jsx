@@ -5,9 +5,11 @@ const Steps = () => {
   return (
     <section className="my-6 md:my-12">
       <div className="mx-4 md:mx-auto w-[95%] lg:w-[59%]">
-        <p className="font-syne font-extrabold text-[32px] md:text-[50px] text-center lg:leading-[65px]">
-          Follow the instructions to cast your{" "}
-          <span className="text-[#003566]"> vote</span>
+        <p className="font-syne font-extrabold text-3xl md:text-6xl text-center leading-[50px] lg:leading-[75px] ">
+          Follow the instructions to cast your Vote;
+          {/* <span className="bg-[#FF4545] rounded-lg p-2 text-white text-2xl md:text-5xl">
+            Vote;
+          </span> */}
         </p>
       </div>
       <div className="flex flex-col md:flex-row justify-center gap-10 items-center w-[90%] mx-auto">
