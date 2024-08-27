@@ -34,10 +34,9 @@ export default function Root() {
     <section>
       <section
         id="navbarbg"
-        className="flex justify-between items-center p-1 my-6  mx-auto w-[80%] rounded-[15px] border-[white] border shadow-lg "
+        className="flex justify-between items-center p-1 my-6  mx-auto w-[80%] rounded-[15px] border-[white] border shadow-lg"
         style={{
-       
-          backdropFilter: 'blur(6px)'
+          backdropFilter: "blur(6px)",
         }}
       >
         <Link to={"/"} className="inline-flex items-center">
@@ -47,7 +46,7 @@ export default function Root() {
               alt="NCA"
               width={100}
               height={100}
-              className=" rounded-full w-full h-full object-cover"
+              className="rounded-full w-full h-full object-cover"
             />
           </div>
         </Link>
@@ -55,11 +54,12 @@ export default function Root() {
           {links.map((link, index) => (
             <NavLink
               key={index}
-              id={link.id && "primaryButton"}
               to={link.route}
               className={({ isActive }) =>
-                `font-poppins ${link.color} ${link.text} hover:border-b-[#D7770D] font-semibold${
-                  isActive ? "vote" : ""
+                `font-poppins ${link.color} ${
+                  link.text
+                } font-semibold hover:border-b-[3px] hover:border-b-[#D7770D] ${
+                  isActive ? "border-b-[#D7770D] border-b-[3px]" : ""
                 }`
               }
             >
@@ -68,7 +68,7 @@ export default function Root() {
           ))}
         </ul>
         <section className="bg-[#fff] rounded-l-[10px] w-full h-full p-4 flex md:hidden justify-end">
-          <div onClick={handleMenu} className="cursor-pointer ">
+          <div onClick={handleMenu} className="cursor-pointer">
             <IoMenu color="black" size={30} />
           </div>
         </section>
@@ -85,13 +85,12 @@ export default function Root() {
                 {links.map((link, index) => (
                   <NavLink
                     key={index}
-                    id={link.id && "navbarButton"}
                     to={link.route}
                     className={({ isActive }) =>
                       `text-xl ${link.color} ${
                         link.text
-                      } text-[18px] font-semibold font-syne p-3 ${
-                        isActive ? "vote" : ""
+                      } text-[18px] font-semibold font-syne p-3 hover:border-b-[3px] hover:border-b-[#D7770D] ${
+                        isActive ? "border-b-[#D7770D] border-b-[3px]" : ""
                       }`
                     }
                   >
