@@ -18,21 +18,25 @@ function App() {
     <>
       <HomeHero />
       <div className="h-[100px]"></div>
-
-      <section className="mx-4 md:mx-10">
-        <p className="font-bold leading-[58px] text-3xl md:text-6xl font-barlow py-2">
-          Trending Districts
-        </p>
-        <TrendingDistricts
-          dataAos="zoom-in"
-          dataAosDuration="700"
-          dataAosDelay="50"
-        />
+      <section className=" bg-slate-200 px-4 pt-10 py-[6rem] h-full">
+        <div className="mx-4 lg:mx-auto lg:w-[85%]">
+          <p className="font-bold text-5xl md:text-6xl leading-[60px] md:leading-[70px] font-dmSerif tracking-wide mb-6 lg:mb-10">
+            Trending Districts
+          </p>
+          <TrendingDistricts
+            dataAos="zoom-in"
+            dataAosDuration="700"
+            dataAosDelay="50"
+          />
+        </div>
       </section>
+
+      <div className="h-[100px]"></div>
+
+      <Steps />
 
       <div className="h-[200px]"></div>
 
-      <Steps />
       <Footer />
     </>
   );

@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -21,28 +22,8 @@
 }
 
 
-#navbarbg{
-    backdrop-filter: blur(8px) saturate(200%);
-    -webkit-backdrop-filter: blur(8px) saturate(200%);
-    background-color: rgba(255, 255, 255, 0.59);
-}
 
-#primaryButton{
- position: relative;
- overflow: hidden;
-  z-index: 1;
-  border-radius: 15px;
-  padding: 20px 10px;
-  display: flex;
-  gap: 5px;
-  width: fit-content;
-  justify-items: center;
-  align-items: center;
-}
-
-
-
-#voteButton:hover, .viewLive:hover, #more:hover, .blackButtons:hover {
+#voteButton:hover, .viewLive:hover, #more:hover, .blackButtons:hover, #primaryButton:hover {
   transform: scale(1.02);
 }
 
@@ -52,37 +33,15 @@ color: black;
 }
 
 
+ #primaryButton{
+  position: relative;
+  display: inline-flex;
+  /* justify-content: center; */
+  align-items: center;
+  padding-left: 24px;
+ }
 
-/* #primaryButton:after {
- content: "";
- background-color: #FF1010;
- position: absolute;
- z-index: -1;
- left: -20%;
- right: -20%;
- top: 0;
- bottom: 0;
- transform: skewX(-45deg) scale(0, 1);
- transition: all 0.5s;
-} */
-#navbarButton:after {
- content: "";
- background-color: white;
- position: absolute;
- z-index: -1;
- left: -20%;
- right: -20%;
- top: 0;
- bottom: 0;
- transform: skewX(-45deg) scale(0, 1);
- transition: all 0.5s;
-}
 
-#primaryButton:hover:after, #navbarButton:hover:after {
- transform: skewX(-45deg) scale(1, 1);
- -webkit-transition: all 0.5s;
- transition: all 0.5s;
-}
 
 .viewLive::before, #primaryButton::before {
    width: 18px;
@@ -95,8 +54,8 @@ color: black;
   animation: pulse 1s linear infinite;
 }
 
-.viewLive::before, #navbarButton::before,
-.viewLive::after, #navbarButton::after {
+.viewLive::before,
+.viewLive::after {
   position: absolute;
   content: "";
   height: 16px;
@@ -104,6 +63,22 @@ color: black;
   border-radius: 50%;
   left: 0px;
   background-color: white;
+}
+
+#liveCard::before,
+#liveCard::after {
+  background-color: black;
+}
+
+#primaryButton::before,
+#primaryButton::after {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  left: 0px;
+  background-color: #D70909;
 }
 
 @keyframes pulse {

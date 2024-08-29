@@ -50,15 +50,18 @@ const LiveResults = () => {
 
   return (
     <section>
-      <section className="flex justify-center items-center mx-4 lg:mx-10 bg-[#000] h-[300px] lg:h-[500px] rounded-[10px]">
-        <p className="text-white relative flex justify-center items-center pl-6 font-poppins text-[32px] lg:text-[59px] leading-[65px] font-bold viewLive">
+      <section className="flex justify-center items-center bg-slate-200 h-[300px] lg:h-[500px] rounded-[10px]">
+        <p
+          className="font-dmSerif tracking-wider leading-[65px] text-center font-bold text-5xl md:text-6xl lg:text-8xl relative flex justify-center items-center pl-6 text-[32px] lg:text-[59px] viewLive"
+          id="liveCard"
+        >
           Live Results
         </p>
       </section>
-      <section className="flex flex-col justify-center gap-4 items-center w-[90%] lg:w-[80%] xl:w-[50%] mx-auto">
+      <section className="flex flex-col justify-center gap-4 items-center w-[90%] lg:w-[80%] mx-auto">
         <>
           <div className="lg:h-[100px]"></div>
-          <p className="font-syne leading-[65px] text-center font-bold text-[22px] md:text-[24px] lg:text-[48px]">
+          <p className="font-dmSerif tracking-wider leading-[65px] text-center font-bold text-[22px] md:text-[24px] lg:text-[48px]">
             Choose your District
           </p>
           <Select
@@ -67,7 +70,7 @@ const LiveResults = () => {
               value: option,
             }))}
             styles={customStyles}
-            className="w-full text-center font-syne font-semibold text-[#040000] text-[20px] md:text-[30px] lg:text-[32px] lg:leading-[65px] mb-10 h-full"
+            className="w-full text-center font-poppins font-semibold text-[#040000] text-[20px] md:text-[30px] lg:text-[32px] lg:leading-[65px] mb-10 h-full"
             placeholder="Please Select...."
             onChange={handleChange}
           />

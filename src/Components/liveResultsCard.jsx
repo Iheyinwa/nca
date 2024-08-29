@@ -2,6 +2,8 @@ import PropTypes from "prop-types";
 import { db } from "../firebase";
 import { collection, getDocs, doc } from "firebase/firestore";
 import { useState, useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const LiveResultsCard = ({ text }) => {
   const [newDistricts, setNewDistricts] = useState([]);
@@ -33,12 +35,15 @@ const LiveResultsCard = ({ text }) => {
         setNewDistricts(churches);
         setNoVotes(false);
         console.log("Matching Churches:", churches);
+
+        AOS.init({
+          duration: 200,
+        });
       } catch (err) {
         console.error("Error getting documents:", err);
       }
     };
 
-    console.log("Text prop:", text);
     getVotes();
   }, [text]);
 
@@ -54,38 +59,49 @@ const LiveResultsCard = ({ text }) => {
   return (
     <section className="w-full my-2">
       {noVotes ? (
-        <p className="text-center font-semibold text-xl">
+        <p className="text-center font-poppins font-semibold text-xl">
           No voting accumulated
         </p>
       ) : (
-        newDistricts.map((district, index) => (
-          <div key={index}>
-            {district && (
-              <div
-                className="rounded-[10px] flex flex-col justify-center items-center border-2 w-full py-4 my-5"
-                style={{
-                  boxShadow: "0px 4px 4px 0px #00000040",
-                  borderColor: getRandomColor(),
-                }}
-              >
-                <div className="w-[80%] md:w-[50%] flex flex-col justify-center items-center gap-3">
-                  <p className="font-semibold text-xl md:text-[40px] text-center md:leading-[65px] font-poppins">
-                    {district.church}
-                  </p>
-                  <div
-                    className="border w-full"
-                    style={{
-                      borderColor: getRandomColor(),
-                    }}
-                  ></div>
-                  <p className="font-semibold text-xl md:text-[40px] text-center md:leading-[65px] font-poppins">
-                    {district.votes} votes
-                  </p>
+        <div
+          className={`grid gap-4 ${
+            newDistricts.length > 1
+              ? "grid-cols-2"
+              : "grid-cols-1"
+          }`}
+        >
+          {newDistricts.map((district, index) => (
+            <div key={index}>
+              {district && (
+                <div
+                  className="rounded-[10px] flex flex-col justify-center items-center border-2 w-full py-4 my-2"
+                  style={{
+                    boxShadow: "0px 4px 4px 0px #00000040",
+                    borderColor: getRandomColor(),
+                  }}
+                  data-aos="zoom-in"
+                  data-aos-duration="700"
+                  data-aos-delay="50"
+                >
+                  <div className="w-[80%] md:w-[50%] flex flex-col justify-center items-center gap-3">
+                    <p className="font-semibold text-xl md:text-[40px] text-center md:leading-[65px] font-poppins">
+                      {district.church}
+                    </p>
+                    <div
+                      className="border w-full"
+                      style={{
+                        borderColor: getRandomColor(),
+                      }}
+                    ></div>
+                    <p className="font-semibold text-xl md:text-[40px] text-center md:leading-[65px] font-poppins">
+                      {district.votes} votes
+                    </p>
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
-        ))
+              )}
+            </div>
+          ))}
+        </div>
       )}
     </section>
   );

@@ -15,7 +15,7 @@ export default function Root() {
       route: "/liveResults",
       name: "Live Results",
       color: "bg-transparent",
-      text: "text-black",
+      text: "text-[#D70909]",
       id: true,
     },
   ];
@@ -32,49 +32,51 @@ export default function Root() {
 
   return (
     <section>
-      <section
-        id="navbarbg"
-        className="flex justify-between items-center p-1 my-6  mx-auto w-[80%] rounded-[15px] border-[white] border shadow-lg"
-        style={{
-          backdropFilter: "blur(6px)",
-        }}
-      >
-        <Link to={"/"} className="inline-flex items-center">
-          <div className="w-16 h-16 rounded-full">
-            <img
-              src={Logo}
-              alt="NCA"
-              width={100}
-              height={100}
-              className="rounded-full w-full h-full object-cover"
-            />
-          </div>
-        </Link>
-        <ul className="hidden md:flex justify-end items-center gap-6 rounded-r-[10px]">
-          {links.map((link, index) => (
-            <NavLink
-              key={index}
-              to={link.route}
-              className={({ isActive }) =>
-                `font-poppins ${link.color} ${
-                  link.text
-                } font-semibold hover:border-b-[3px] hover:border-b-[#D7770D] ${
-                  isActive ? "border-b-[#D7770D] border-b-[3px]" : ""
-                }`
-              }
-            >
-              {link.name}
-            </NavLink>
-          ))}
-        </ul>
-        <section className="bg-[#fff] rounded-l-[10px] w-full h-full p-4 flex md:hidden justify-end">
-          <div onClick={handleMenu} className="cursor-pointer">
-            <IoMenu color="black" size={30} />
-          </div>
+      <div>
+        <section
+          className="flex justify-between items-center p-1 my-6 mx-4 lg:mx-auto lg:w-[85%] rounded-[15px] border-[white] border shadow-lg"
+          style={{
+            backdropFilter: "blur(6px)",
+          }}
+        >
+          <Link to={"/"} className="inline-flex items-center">
+            <div className="w-16 h-16 rounded-full">
+              <img
+                src={Logo}
+                alt="NCA"
+                width={100}
+                height={100}
+                className="rounded-full w-full h-full object-cover"
+              />
+            </div>
+          </Link>
+          <ul className="hidden md:flex justify-end items-center gap-6 rounded-r-[10px]">
+            {links.map((link, index) => (
+              <NavLink
+                key={index}
+                id={link.id && "primaryButton"}
+                to={link.route}
+                className={({ isActive }) =>
+                  `font-poppins ${link.color} ${
+                    link.text
+                  } font-semibold hover:border-b-[3px] hover:border-b-[#D7770D] ${
+                    link.id && "justify-center"
+                  } ${isActive ? "border-b-[#D7770D] border-b-[3px]" : ""}`
+                }
+              >
+                {link.name}
+              </NavLink>
+            ))}
+          </ul>
+          <section className="bg-[#fff] rounded-l-[10px] w-full h-full p-4 flex md:hidden justify-end">
+            <div onClick={handleMenu} className="cursor-pointer">
+              <IoMenu color="black" size={30} />
+            </div>
+          </section>
         </section>
         {menu && (
-          <section className="fixed inset-0 flex items-center justify-end bg-black bg-opacity-50 z-10">
-            <div className="bg-white flex flex-col gap-2 w-[50%] h-full p-4">
+          <section className="fixed inset-0 bg-black bg-opacity-50 z-10 flex items-center justify-end">
+            <div className="bg-white flex flex-col gap-2 w-full max-w-[300px] h-full p-4">
               <div
                 className="justify-end flex cursor-pointer"
                 onClick={handleClose}
@@ -85,13 +87,14 @@ export default function Root() {
                 {links.map((link, index) => (
                   <NavLink
                     key={index}
+                    id={link.id && "primaryButton"}
                     to={link.route}
                     className={({ isActive }) =>
                       `text-xl ${link.color} ${
                         link.text
-                      } text-[18px] font-semibold font-syne p-3 hover:border-b-[3px] hover:border-b-[#D7770D] ${
-                        isActive ? "border-b-[#D7770D] border-b-[3px]" : ""
-                      }`
+                      } text-[18px] font-semibold font-syne p-3 hover:border-b-[3px] hover:border-b-[#D7770D] w-fit ${
+                        link.id && "justify-start"
+                      } ${isActive ? "border-b-[#D7770D] border-b-[3px]" : ""}`
                     }
                   >
                     {link.name}
@@ -101,7 +104,7 @@ export default function Root() {
             </div>
           </section>
         )}
-      </section>
+      </div>
       <Outlet />
     </section>
   );

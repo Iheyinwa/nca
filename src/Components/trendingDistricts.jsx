@@ -92,7 +92,7 @@ const TrendingDistricts = ({ dataAos, dataAosDuration, dataAosDelay }) => {
           />
         </div>
       ) : (
-        <>
+        <section>
           <section className="grid grid-cols-2 lg:grid-cols-4 gap-4 items-center">
             {displayedDistricts.map((district, index) => (
               <div
@@ -106,11 +106,11 @@ const TrendingDistricts = ({ dataAos, dataAosDuration, dataAosDelay }) => {
                 }}
               >
                 <div
-                  className="flex flex-col justify-center items-center absolute z-[2] overflow-hidden p-2 w-full h-full rounded-md top-[5px] left-[6px] bottom-[5px]"
+                  className="flex flex-col justify-center items-center absolute z-[2] overflow-hidden p-4 left-[5px] right-[5px] top-[5px] bottom-[5px] rounded-md"
                   style={{
                     backdropFilter: "blur(24px)",
                     background: "rgba(255, 255, 255, .95)",
-                    outline: '2px solid white'
+                    outline: "2px solid white",
                   }}
                 >
                   <p className="font-bold text-2xl font-poppins">
@@ -142,7 +142,7 @@ const TrendingDistricts = ({ dataAos, dataAosDuration, dataAosDelay }) => {
               onClick={() => setViewMore(!viewMore)}
             />
           )}
-        </>
+        </section>
       )}
     </>
   );

@@ -7,7 +7,8 @@ export default {
         syne: ["Syne", "sans-serif"],
         poppins: ["Poppins", "sans-serif"],
         inter: ["Inter", "sans-serif"],
-        barlow: ["Barlow", "sans-serif"]
+        barlow: ["Barlow", "sans-serif"],
+        dmSerif: ["DM Serif Text", "sans-serif"],
       },
     },
   },

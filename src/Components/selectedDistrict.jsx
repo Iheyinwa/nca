@@ -114,11 +114,11 @@ const SelectedDistrict = ({ text, churches }) => {
           >
             <FaArrowLeft color="white" size={25} />
           </div>
-          <p className="font-syne leading-[65px] font-bold text-[30px] md:text-[59px] mx-auto">
+          <p className="font-dmSerif tracking-wider leading-[65px] font-bold text-[30px] md:text-[59px] mx-auto">
             {text}
           </p>
         </div>
-        <section className="w-full grid grid-cols-1 md:grid-cols-2 items-center gap-3 my-4">
+        <section className="w-full grid grid-cols-1 md:grid-cols-2 items-center gap-3 my-4 md:my-6">
           {churches.map((church, index) => (
             <div key={index}>
               <DistrictCard

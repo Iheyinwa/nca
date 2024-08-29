@@ -70,33 +70,33 @@ const Vote = () => {
 
   return (
     <section>
-      <section className="flex justify-center items-center bg-[#000] h-[300px] lg:h-[500px] mx-4 lg:mx-10 rounded-[10px]">
+      <section className="flex justify-center items-center bg-slate-200 h-[300px] lg:h-[500px] rounded-[10px]">
         <div className="flex flex-col justify-center items-center">
-          <p className="font-syne leading-[65px] text-center font-bold text-white text-2xl md:text-[30px] lg:text-[59px]">
+          <p className="font-dmSerif tracking-wider leading-[65px] text-center font-bold  text-5xl md:text-6xl lg:text-8xl">
             Cast your vote now
           </p>
-          <div className="flex justify-center items-center my-4 gap-4 w-[90%] relative">
+          <div className="flex justify-center items-center my-4 gap-4 w-full relative">
             <Link to="/liveResults">
-              <button className="bg-[#FF4545] px-6 py-4 h-full rounded-[12px] w-full">
-                <p className="relative text-white font-syne font-semibold text-xl md:text-[28px] text-center viewLive flex justify-center items-center pl-6">
+              <button className="bg-[#D70909] px-8 py-4 h-full rounded-[12px] w-full">
+                <p className="relative font-poppins font-semibold text-xl md:text-[28px] text-center text-white viewLive flex justify-center items-center pl-6">
                   Live
                 </p>
               </button>
             </Link>
 
-            <p className="text-white font-syne font-medium text-xl md:text-[28px]">
+            <p className="font-poppins font-medium text-xl md:text-[28px]">
               Follow Live Results
             </p>
           </div>
         </div>
       </section>
-      <section className="flex flex-col justify-center gap-4 items-center w-[90%] lg:w-[80%] xl:w-[50%] mx-auto my-4">
+      <section className="flex flex-col justify-center gap-4 items-center w-[90%] lg:w-[80%] mx-auto my-4">
         {selectedOption ? (
           <SelectedDistrict text={selectedOption} churches={churchOptions} />
         ) : (
           <>
             <div className="lg:h-[100px]"></div>
-            <p className="font-syne leading-[65px] text-center font-bold text-[22px] md:text-[24px] lg:text-[48px]">
+            <p className="font-dmSerif tracking-wider leading-[65px] text-center font-bold text-[22px] md:text-[24px] lg:text-[48px]">
               Choose your District
             </p>
             <Select
@@ -105,7 +105,7 @@ const Vote = () => {
                 value: option,
               }))}
               styles={customStyles}
-              className="w-full text-center font-syne font-semibold text-[#040000] text-[20px] md:text-[30px] lg:text-[32px] lg:leading-[65px] mb-10 h-full"
+              className="w-full text-center font-poppins font-semibold text-[#040000] text-[20px] md:text-[30px] lg:text-[32px] lg:leading-[65px] mb-10 h-full"
               placeholder="Please Select..."
               onChange={handleChange}
             />

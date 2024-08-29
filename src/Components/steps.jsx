@@ -3,42 +3,40 @@ import StepsCard from "./stepsCard";
 
 const Steps = () => {
   return (
-    <section className="my-6 md:my-12">
+    <section className="my-6">
       <div className="mx-4 md:mx-auto w-[95%] lg:w-[59%]">
-        <p className="font-syne font-extrabold text-3xl md:text-6xl text-center leading-[50px] lg:leading-[75px] ">
-          Follow the instructions to cast your Vote;
-          {/* <span className="bg-[#FF4545] rounded-lg p-2 text-white text-2xl md:text-5xl">
-            Vote;
-          </span> */}
+        <p className="font-dmSerif tracking-wider text-5xl md:text-6xl leading-[60px] md:leading-[70px] font-bold text-center">
+          Follow the instructions to cast your vote;
         </p>
       </div>
-      <div className="flex flex-col md:flex-row justify-center gap-10 items-center w-[90%] mx-auto">
-        <div className="w-fit h-fit">
+      <div className="grid grid-cols-1 lg:grid-cols-7 gap-4 lg:grid-rows-4 w-[90%] mx-auto my-4">
+        <StepsCard
+          count="1"
+          content="Let your living waters Flow out of me Let your Holy Spirit overshadow me
+        As it was in the beginning So let it be now"
+          className="lg:col-start-6 lg:col-span-2 lg:row-start-1 lg:row-end-2"
+        />
+        <div className="w-fit h-full lg:col-span-3 lg:row-start-1 lg:row-end-4">
           <img
             src={Logo}
             alt="NCA Steps"
-            width={500}
-            height={500}
-            className="text-white w-full h-full"
+            width={300}
+            height={300}
+            className="text-white w-full h-full object-contain"
           />
         </div>
-        <section className="md:w-[40%]">
-          <StepsCard
-            count="1"
-            content="Let your living waters Flow out of me Let your Holy Spirit overshadow me
+        <StepsCard
+          count="2"
+          content="Let your living waters Flow out of me Let your Holy Spirit overshadow me
         As it was in the beginning So let it be now"
-          />
-          <StepsCard
-            count="2"
-            content="Let your living waters Flow out of me Let your Holy Spirit overshadow me
+          className="lg:col-start-1 lg:col-span-2 lg:row-start-2 lg:row-end-3"
+        />
+        <StepsCard
+          count="3"
+          content="Let your living waters Flow out of me Let your Holy Spirit overshadow me
         As it was in the beginning So let it be now"
-          />
-          <StepsCard
-            count="3"
-            content="Let your living waters Flow out of me Let your Holy Spirit overshadow me
-        As it was in the beginning So let it be now"
-          />
-        </section>
+          className="lg:row-start-3 lg:row-span-1 lg:col-start-6 lg:col-span-2 "
+        />
       </div>
     </section>
   );
