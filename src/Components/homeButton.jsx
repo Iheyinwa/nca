@@ -5,7 +5,7 @@ const HomeButton = ({text, color, border, textColor, route, id, onClick}) => {
   return (
     <button
     id={id}
-      className={`rounded-full p-3 w-full ${color} border ${border} ${textColor} shadow-md text-[22px] leading-[33px] font-bold text-center`}
+      className={`rounded-full w-full p-3 ${color} border ${border} ${textColor} shadow-md text-[22px] leading-[33px] font-poppins text-center`}
       onClick={onClick}
     >
       <Link to={route}>{text}</Link>

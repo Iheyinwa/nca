@@ -33,10 +33,9 @@ color: black;
 }
 
 
- #primaryButton{
+ #primaryButton, #homeLive{
   position: relative;
   display: inline-flex;
-  /* justify-content: center; */
   align-items: center;
   padding-left: 24px;
  }
@@ -55,14 +54,29 @@ color: black;
 }
 
 .viewLive::before,
-.viewLive::after {
+.viewLive::after,
+#primaryButton::before,
+#primaryButton::after,
+#homeLive::before,
+#homeLive::after {
   position: absolute;
   content: "";
   height: 16px;
   width: 16px;
   border-radius: 50%;
   left: 0px;
+}
+
+.viewLive::before,
+.viewLive::after {
   background-color: white;
+}
+
+#homeLive::before,
+#homeLive::after,
+#primaryButton::before,
+#primaryButton::after {
+  background-color: #D70909;
 }
 
 #liveCard::before,
@@ -70,16 +84,6 @@ color: black;
   background-color: black;
 }
 
-#primaryButton::before,
-#primaryButton::after {
-  position: absolute;
-  content: "";
-  height: 16px;
-  width: 16px;
-  border-radius: 50%;
-  left: 0px;
-  background-color: #D70909;
-}
 
 @keyframes pulse {
   from {
@@ -102,7 +106,7 @@ color: black;
    float: right;
    margin: 20px 0;
    font-size: 18px;
-   width: fit-content;
+  width: 10rem;
 }
 
 .blob {
