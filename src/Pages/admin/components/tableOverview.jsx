@@ -64,7 +64,21 @@ const TableOverview = ({ data, handleOk, confirmLoading, }) => {
     },
   ];
 
-  return <Table columns={columns} dataSource={data} />;
+  return (
+    <div className="overflow-x-auto">
+      {" "}
+      {/* Add this wrapper for horizontal scroll */}
+      <Table
+        columns={columns}
+        dataSource={data}
+        style={{
+          fontFamily: "Poppins",
+        }}
+        pagination={{ pageSize: 10 }} // Adjust page size if needed
+        scroll={{ x: "max-content" }} // Enable horizontal scroll
+      />
+    </div>
+  );
 };
 
 TableOverview.propTypes = {

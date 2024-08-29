@@ -92,7 +92,7 @@ const Districts = () => {
   };
 
   return (
-    <section className="m-4">
+    <section className="m-4 h-full">
       <form onSubmit={handleSubmit} className="p-4">
         <InputField
           type="text"
@@ -116,7 +116,7 @@ const Districts = () => {
           <LuPlusCircle size={25} color="#9ca3af" />
           <button
             type="button" // Prevent form submission on click
-            className="text-gray-400 font-semibold text-xl font-syne"
+            className="text-gray-400 text-xl font-poppins"
             onClick={handleAddChurch}
           >
             Add another church
@@ -124,7 +124,7 @@ const Districts = () => {
         </div>
 
         <div className="flex justify-end">
-          <button className="bg-green-600 border-green-600 text-white font-semibold py-2 px-4 rounded text-xl font-syne">
+          <button className="bg-green-600 border-green-600 text-white py-2 px-4 rounded text-xl font-poppins">
             {isSubmitting ? (
               <FaSpinner color="white" className="animate-spin" />
             ) : (

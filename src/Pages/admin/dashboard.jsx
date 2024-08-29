@@ -9,7 +9,7 @@ import { Spin} from "antd";
 import {toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import TrendingDistricts from "../../Components/trendingDistricts";
-import TotalEarnings from "./components/totalEarnings";
+// import TotalEarnings from "./components/totalEarnings";
 
 const Dashboard = () => {
   const [districtOptions, setDistrictOptions] = useState([]);
@@ -123,10 +123,10 @@ const Dashboard = () => {
 
   return (
     <section>
-      <TotalEarnings />
+      {/* <TotalEarnings /> */}
 
       <section className="m-4 p-4">
-        <p className="font-bold text-3xl font-syne py-2">Trending Districts</p>
+        <p className="font-bold text-3xl font-dmSerif tracking-wider py-2">Trending Districts</p>
         <TrendingDistricts />
       </section>
 
@@ -134,7 +134,7 @@ const Dashboard = () => {
       <section className="m-4 p-4">
 
         <div>
-          <p className="my-4 font-syne text-4xl font-bold">Voting Table</p>
+          <p className="my-4 font-bold text-3xl font-dmSerif tracking-wider ">Voting Table</p>
           <Select
             options={districtOptions.map((option) => ({
               label: option,

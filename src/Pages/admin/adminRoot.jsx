@@ -5,18 +5,14 @@ import { FaTimes } from "react-icons/fa";
 import { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Footer from "../../Components/footer";
+import AdminFooter from "./components/adminFooter";
 
 export default function AdminRoot() {
-   const [menu, setShowMenu] = useState(false);
+  const [menu, setShowMenu] = useState(false);
 
-   const handleMenu = () => {
-     return setShowMenu(true);
-   };
+  const handleMenu = () => setShowMenu(true);
 
-   const handleClose = () => {
-     return setShowMenu(false);
-   };
+  const handleClose = () => setShowMenu(false);
 
   const links = [
     {
@@ -33,7 +29,7 @@ export default function AdminRoot() {
     <>
       <ToastContainer />
       <section className="lg:flex">
-        <aside className="lg:fixed lg:w-[20%] h-full lg:h-screen bg-white shadow-md flex lg:flex-col justify-between items-center lg:justify-start lg:items-start p-4 ">
+        <aside className="lg:fixed lg:w-[20%] h-full lg:h-screen bg-slate-200 flex lg:flex-col justify-between items-center lg:justify-start lg:items-start p-4">
           <div className="w-20 h-20 p-2">
             <img
               src={NCA}
@@ -43,17 +39,17 @@ export default function AdminRoot() {
               className="rounded-full w-full h-full object-cover shadow-lg"
             />
           </div>
-          <ul className=" w-full text-center hidden lg:flex flex-col gap-4 my-4">
+          <ul className="w-full text-center hidden lg:flex flex-col gap-4 my-4">
             {links.map((link, index) => (
               <NavLink
                 key={index}
                 to={link.route}
                 end
                 className={({ isActive }) =>
-                  `text-xl w-full font-bold text-left font-syne text-black p-4 ${
+                  `text-xl w-full font-bold text-left font-poppins text-black p-4 ml-4 transition-all duration-300 ${
                     isActive
-                      ? " bg-[#000] border-[#000] text-white rounded-md"
-                      : ""
+                      ? "bg-[#fff] rounded-l-md "
+                      : "hover:bg-[#e2e8f0] hover:rounded-l-md"
                   }`
                 }
               >
@@ -62,14 +58,15 @@ export default function AdminRoot() {
             ))}
           </ul>
           <div onClick={handleMenu} className="cursor-pointer lg:hidden">
-            <IoMenu color="white" size={50} />
+            <IoMenu color="black" size={50} />
           </div>
         </aside>
+
         {menu && (
-          <section className="fixed inset-0 flex items-center justify-end bg-black bg-opacity-50 z-10">
-            <div className="bg-white flex flex-col gap-2 w-[50%] h-full p-4">
+          <section className="fixed inset-0 flex items-center justify-end bg-black bg-opacity-50 z-[1200]">
+            <div className="bg-white flex flex-col gap-2 w-[50%] h-full">
               <div
-                className="justify-end flex cursor-pointer"
+                className="justify-end flex cursor-pointer p-4"
                 onClick={handleClose}
               >
                 <FaTimes color="black" size={25} />
@@ -79,11 +76,12 @@ export default function AdminRoot() {
                   <NavLink
                     key={index}
                     to={link.route}
+                    end
                     className={({ isActive }) =>
-                      `text-xl text-[18px] font-medium font-syne p-4 border-b ${
+                      `text-xl w-full font-bold text-left font-poppins text-black p-4 mr-6 transition-all duration-300 ${
                         isActive
-                          ? "font-bold text-[#312F49] text-2xl"
-                          : "text-black"
+                          ? "bg-[#e2e8f0] rounded-l-md "
+                          : "hover:bg-[#e2e8f0] hover:rounded-l-md"
                       }`
                     }
                   >
@@ -94,16 +92,23 @@ export default function AdminRoot() {
             </div>
           </section>
         )}
+
         <div className="lg:ml-[20%] w-full h-screen overflow-y-auto">
-          <section className="p-4 shadow-md font-syne text-3xl">
-            <p className="p-4 font-syne text-4xl font-bold">Welcome to Admin Dashboard</p>
+          <section
+            className="p-4 shadow-md"
+            style={{
+              backdropFilter: "blur(6px)",
+            }}
+          >
+            <p className="p-4 font-dmSerif tracking-wider text-xl lg:text-4xl font-bold">
+              Welcome to Admin Dashboard
+            </p>
           </section>
 
           <Outlet />
-          <Footer />
+          <AdminFooter />
         </div>
       </section>
-     
     </>
   );
 }
