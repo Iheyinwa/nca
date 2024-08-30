@@ -100,7 +100,7 @@ export default function AdminRoot() {
               backdropFilter: "blur(6px)",
             }}
           >
-            <p className="p-4 font-dmSerif tracking-wider text-xl lg:text-4xl font-bold">
+            <p className="p-4 font-dmSerif tracking-wider text-4xl font-bold">
               Welcome to Admin Dashboard
             </p>
           </section>

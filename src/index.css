@@ -23,13 +23,16 @@
 
 
 
-#voteButton:hover, .viewLive:hover, #more:hover, .blackButtons:hover, #primaryButton:hover {
+#voteButton:hover, .viewLive:hover, #more:hover, #primaryButton:hover {
   transform: scale(1.02);
 }
 
-#voteButton{
-background-color: white;
+#voteButton:hover{
+background-color: transparent;
 color: black;
+border: 1px solid #D7770D;
+transition: all .4s;
+font-weight: 500;
 }
 
 
@@ -56,9 +59,7 @@ color: black;
 .viewLive::before,
 .viewLive::after,
 #primaryButton::before,
-#primaryButton::after,
-#homeLive::before,
-#homeLive::after {
+#primaryButton::after {
   position: absolute;
   content: "";
   height: 16px;
@@ -72,8 +73,7 @@ color: black;
   background-color: white;
 }
 
-#homeLive::before,
-#homeLive::after,
+
 #primaryButton::before,
 #primaryButton::after {
   background-color: #D70909;
@@ -97,10 +97,6 @@ color: black;
   }
 }
 
-.vote, .vote:hover{
-   border-bottom: 1px solid #FF4545;
-   transition: .4s ease;
-}
 
 #more{
    float: right;

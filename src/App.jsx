@@ -20,7 +20,7 @@ function App() {
       <div className="h-[100px]"></div>
       <section className=" bg-slate-200 px-4 pt-10 py-[6rem] h-full">
         <div className="mx-4 lg:mx-auto lg:w-[85%]">
-          <p className="font-bold text-5xl md:text-6xl leading-[60px] md:leading-[70px] font-dmSerif tracking-wider mb-6 lg:mb-10">
+          <p className="font-bold text-4xl md:text-6xl leading-[60px] md:leading-[70px]  font-dmSerif tracking-wider mb-6 lg:mb-10">
             Trending Districts
           </p>
           <TrendingDistricts

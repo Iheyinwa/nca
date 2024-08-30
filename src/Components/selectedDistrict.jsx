@@ -47,7 +47,7 @@ const SelectedDistrict = ({ text, churches }) => {
     const formData = {
       amount: data.amount,
       votes: data.amount / 50,
-      church: churches[selectedDistrictIndex], // Adjusted to handle strings
+      church: churches[selectedDistrictIndex].name, // Access the name property of the selected church
     };
 
     setFormData(formData);
@@ -58,7 +58,7 @@ const SelectedDistrict = ({ text, churches }) => {
     setShowPopup(false);
 
     const cleanedText = text.replace(/\s+/g, "");
-    const cleanedChurchName = churches[selectedDistrictIndex].replace(
+    const cleanedChurchName = churches[selectedDistrictIndex].name.replace(
       /\s+/g,
       ""
     );
@@ -122,7 +122,8 @@ const SelectedDistrict = ({ text, churches }) => {
           {churches.map((church, index) => (
             <div key={index}>
               <DistrictCard
-                name={church} // Display the string directly
+                name={church.name}
+                churchImage={church.imageUrl || ""} // Access imageUrl from the church object
                 onClick={() => handleVoting(index)}
               />
             </div>
@@ -148,7 +149,12 @@ const SelectedDistrict = ({ text, churches }) => {
 
 SelectedDistrict.propTypes = {
   text: PropTypes.string.isRequired,
-  churches: PropTypes.arrayOf(PropTypes.string).isRequired, // Adjusted to handle array of strings
+  churches: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      imageUrl: PropTypes.string, // Assuming imageUrl is optional
+    })
+  ).isRequired,
 };
 
 export default SelectedDistrict;

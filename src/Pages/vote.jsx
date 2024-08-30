@@ -56,12 +56,16 @@ const Vote = () => {
       );
       const churchNames = await getDocs(churchNamesRef);
 
-      const churchOptionsArray = [];
-      churchNames.forEach((doc) => {
-        churchOptionsArray.push(doc.id);
-      });
+       const churchOptionsArray = churchNames.docs.map((churchDoc) => {
+         const data = churchDoc.data();
+         return {
+           church: churchDoc.id,
+           ...data,
+         };
+       });
 
-      setChurchOptions(churchOptionsArray); // Update state here
+       setChurchOptions(churchOptionsArray);
+
       console.log(churchOptionsArray);
     } catch (e) {
       console.log(e);

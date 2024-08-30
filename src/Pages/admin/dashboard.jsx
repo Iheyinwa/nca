@@ -4,20 +4,21 @@ import { db } from "../../firebase";
 import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { customStyles } from "../../Data/data";
-import { ImSpinner4 } from "react-icons/im";
-import { Spin} from "antd";
-import {toast} from "react-toastify";
+import { Spin } from "antd";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import TrendingDistricts from "../../Components/trendingDistricts";
-// import TotalEarnings from "./components/totalEarnings";
+import TotalEarnings from "./components/totalEarnings";
+import ViewAll from "./components/viewAll";
 
 const Dashboard = () => {
   const [districtOptions, setDistrictOptions] = useState([]);
-  const [selectedOption, setSelectedOption] = useState("Ikorodu District");
+  const [selectedOption, setSelectedOption] = useState("");
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [, setIsModalOpen] = useState(false);
+  const [isViewAll, setIsViewAll] = useState(true);
 
   const fetchChurchData = async (districtName) => {
     setIsLoading(true);
@@ -33,9 +34,10 @@ const Dashboard = () => {
       churchesSnap.forEach((doc) => {
         const church = doc.data();
         churchData.push({
-          key: doc.id, 
+          key: doc.id,
           name: church.name,
-          amount: `₦ ${church.amount}`,
+          imageUrl: church.imageUrl,
+          amount: church.amount, // Assuming amount is a number
           votes: church.votes,
         });
       });
@@ -51,10 +53,9 @@ const Dashboard = () => {
   const handleChange = async (selectedOption) => {
     setSelectedOption(selectedOption.value);
     fetchChurchData(selectedOption.value);
+    setIsViewAll(false); // Hide ViewAll when a district is selected
   };
 
-
-  
   useEffect(() => {
     const getDistrictList = async () => {
       try {
@@ -68,9 +69,6 @@ const Dashboard = () => {
         });
 
         setDistrictOptions(districtOption);
-
-        // Fetch initial data for "Ikorodu District"
-        fetchChurchData("Ikorodu District");
       } catch (error) {
         console.error("Error fetching district data:", error);
       }
@@ -78,7 +76,6 @@ const Dashboard = () => {
 
     getDistrictList();
   }, []); // Empty dependency array to run effect only once
-
 
   const handleOk = async (data, index) => {
     setConfirmLoading(true);
@@ -123,44 +120,46 @@ const Dashboard = () => {
 
   return (
     <section>
-      {/* <TotalEarnings /> */}
+      <TotalEarnings />
 
       <section className="m-4 p-4">
-        <p className="font-bold text-3xl font-dmSerif tracking-wider py-2">Trending Districts</p>
+        <p className="font-bold text-3xl font-dmSerif tracking-wider py-2">
+          Trending Districts
+        </p>
         <TrendingDistricts />
       </section>
 
       <div className="h-[100px]"></div>
       <section className="m-4 p-4">
-
         <div>
-          <p className="my-4 font-bold text-3xl font-dmSerif tracking-wider ">Voting Table</p>
-          <Select
-            options={districtOptions.map((option) => ({
-              label: option,
-              value: option,
-            }))}
-            styles={customStyles}
-            className="w-full text-center font-syne font-medium text-[#040000] text-[20px] md:text-[20px] lg:text-[20px] lg:leading-[40px] mb-10 h-full"
-            placeholder="Please Select...."
-            onChange={handleChange}
-            value={{ label: selectedOption, value: selectedOption }} // Set initial value
-          />
-        </div>
-        {isLoading ? (
-          <div className="flex justify-center items-center h-[200px]">
-            <Spin
-              indicator={
-                <ImSpinner4
-                  style={{
-                    fontSize: 24,
-                    display: "flex",
-                    alignItem: "center",
-                  }}
-                  className="animate-spin"
-                />
-              }
+          <p className="my-4 font-bold text-3xl font-dmSerif tracking-wider ">
+            Voting Table
+          </p>
+          <div className="flex justify-between items-center mb-10">
+            <Select
+              options={districtOptions.map((option) => ({
+                label: option,
+                value: option,
+              }))}
+              styles={customStyles}
+              className="w-4/5 text-center font-syne font-medium text-[#040000] text-[20px] md:text-[20px] lg:text-[20px] lg:leading-[40px] "
+              placeholder="Please Select...."
+              onChange={handleChange}
+              value={{ label: selectedOption, value: selectedOption }} // Set initial value
             />
+            <button
+              onClick={() => setIsViewAll(true)} // Fixed the function call issue
+              className="font-poppins py-2 px-3 rounded-md shadow-md border-gray-300 bg-gray-300"
+            >
+              View All Districts
+            </button>
+          </div>
+        </div>
+        {isViewAll ? (
+          <ViewAll />
+        ) : isLoading ? (
+          <div className="flex justify-center items-center h-[200px]">
+            <Spin size="large" />
           </div>
         ) : (
           <TableOverview

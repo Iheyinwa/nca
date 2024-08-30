@@ -1,4 +1,4 @@
-import { Table, Button, Modal } from "antd";
+import { Table, Button, Modal, Image } from "antd";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { MdDelete } from "react-icons/md";
@@ -18,7 +18,23 @@ const TableOverview = ({ data, handleOk, confirmLoading, }) => {
 
   const columns = [
     {
-      title: "Churches",
+      title: "Church Image",
+      dataIndex: "imageUrl",
+      render: (imageUrl) => (
+        <Image
+          width={100}
+          src={imageUrl}
+          alt="Church Image"
+          preview={false}
+          style={{
+            borderRadius: "8px",
+            boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+          }}
+        />
+      ),
+    },
+    {
+      title: "Church",
       dataIndex: "name",
       showSorterTooltip: {
         target: "full-header",

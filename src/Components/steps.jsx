@@ -5,7 +5,7 @@ const Steps = () => {
   return (
     <section className="my-6">
       <div className="mx-4 md:mx-auto w-[95%] lg:w-[59%]">
-        <p className="font-dmSerif tracking-wider text-5xl md:text-6xl leading-[60px] md:leading-[70px] font-bold text-center">
+        <p className="font-dmSerif tracking-wider text-4xl md:text-6xl leading-[60px] md:leading-[70px] font-bold text-center">
           Follow the instructions to cast your vote;
         </p>
       </div>
