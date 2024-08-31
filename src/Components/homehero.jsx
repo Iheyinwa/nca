@@ -9,15 +9,17 @@ const HomeHero = () => {
           <p className="text-6xl md:text-8xl font-extrabold font-dmSerif tracking-wider">
             National
           </p>
-          <p className="text-6xl md:text-8xl font-extrabold font-dmSerif tracking-wider relative inline-block w-fit">
-            President
+          <div className="relative inline-block w-fit">
+            <p className="text-6xl md:text-8xl font-extrabold font-dmSerif tracking-wider">
+              President
+            </p>
             <div
               className="absolute bottom-0 left-0 right-0 h-1 bg-[#D77709]"
               style={{
                 filter: "blur(15px)",
               }}
             ></div>
-          </p>
+          </div>
           <p className="text-6xl md:text-8xl font-extrabold font-dmSerif tracking-wider relative inline-block w-fit">
             Trophy
           </p>
