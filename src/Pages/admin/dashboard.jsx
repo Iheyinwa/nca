@@ -75,7 +75,7 @@ const Dashboard = () => {
     };
 
     getDistrictList();
-  }, []); // Empty dependency array to run effect only once
+  }, []); 
 
   const handleOk = async (data, index) => {
     setConfirmLoading(true);
