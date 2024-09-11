@@ -85,7 +85,7 @@ const SelectedDistrict = ({ text, churches }) => {
             {
               name: cleanedChurchName, // Include name in the document
               amount: increment(data.amount),
-              votes: increment(data.amount / 50),
+              votes: increment(data.amount / 100),
             },
             { merge: true }
           );

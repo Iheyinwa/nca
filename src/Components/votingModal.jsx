@@ -3,18 +3,16 @@ import InputField from "./inputField";
 import { FaTimes } from "react-icons/fa";
 import { useState } from "react";
 
-const VotingModal = ({onSubmit, handlePopupCancel}) => {
+const VotingModal = ({ onSubmit, handlePopupCancel }) => {
   const [email, setEmail] = useState("");
   const [amount, setAmount] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = { email, amount };
-    console.log(data)
+    console.log(data);
     onSubmit(data);
   };
-
-
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 px-4 h-full">
@@ -45,7 +43,7 @@ const VotingModal = ({onSubmit, handlePopupCancel}) => {
           <InputField
             type="text"
             title="Amount"
-            note="(₦50 per vote)"
+            note="(₦100 per vote)"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
           />
@@ -67,9 +65,8 @@ const VotingModal = ({onSubmit, handlePopupCancel}) => {
   );
 };
 
-
 VotingModal.propTypes = {
   onSubmit: PropTypes.func,
-  handlePopupCancel: PropTypes.func
+  handlePopupCancel: PropTypes.func,
 };
 export default VotingModal;
