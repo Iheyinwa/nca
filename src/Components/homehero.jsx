@@ -1,4 +1,4 @@
-import voteHero from "../Assets/Images/votes.jpg";
+import voteHero from "../Assets/Images/heroGS.png";
 import HomeButton from "./homeButton";
 
 const HomeHero = () => {
@@ -7,11 +7,11 @@ const HomeHero = () => {
       <div className="flex justify-between gap-4 flex-col lg:flex-row items-center lg:w-[85%] h-full">
         <section className="w-full flex justify-start flex-col gap-4">
           <p className="text-6xl md:text-8xl font-extrabold font-dmSerif tracking-wider">
-            National
+            General
           </p>
           <div className="relative inline-block w-fit">
             <p className="text-6xl md:text-8xl font-extrabold font-dmSerif tracking-wider">
-              President
+              SuperIntendent
             </p>
             <div
               className="absolute bottom-0 left-0 right-0 h-1 bg-[#D77709]"

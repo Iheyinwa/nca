@@ -1,5 +1,5 @@
 import NCA from "../../Assets/Images/NCA_LOGO.png";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
 import { FaTimes } from "react-icons/fa";
 import { useState } from "react";
@@ -9,10 +9,14 @@ import AdminFooter from "./components/adminFooter";
 
 export default function AdminRoot() {
   const [menu, setShowMenu] = useState(false);
+  const navigate = useNavigate();
 
   const handleMenu = () => setShowMenu(true);
 
   const handleClose = () => setShowMenu(false);
+  const handleImageClick = () => {
+    navigate("/"); // Route to home page when image is clicked
+  };
 
   const links = [
     {
@@ -30,7 +34,10 @@ export default function AdminRoot() {
       <ToastContainer />
       <section className="lg:flex">
         <aside className="lg:fixed lg:w-[20%] h-full lg:h-screen bg-slate-200 flex lg:flex-col justify-between items-center lg:justify-start lg:items-start p-4">
-          <div className="w-20 h-20 p-2">
+          <div
+            className="w-20 h-20 p-2 cursor-pointer"
+            onClick={handleImageClick}
+          >
             <img
               src={NCA}
               alt="NCA"
