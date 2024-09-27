@@ -1,4 +1,4 @@
-import NCA from "../../Assets/Images/NCA_LOGO.png";
+import NCA from "../../Assets/Images/onecross.jpg";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
 import { FaTimes } from "react-icons/fa";
@@ -41,8 +41,8 @@ export default function AdminRoot() {
             <img
               src={NCA}
               alt="NCA"
-              width={100}
-              height={100}
+              width={200}
+              height={200}
               className="rounded-full w-full h-full object-cover shadow-lg"
             />
           </div>

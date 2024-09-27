@@ -185,17 +185,22 @@ const Districts = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    let trimmedName = name.replace(/\s+/g, "");
+    // Ensure spaces are retained in the name
+    let trimmedName = name.trim(); // Just trim extra spaces around, not inside
+
     const districtRegex = /district/i;
     if (districtRegex.test(trimmedName)) {
+      // Only replace 'district' if it exists, to maintain case consistency
       trimmedName = trimmedName.replace(districtRegex, "District");
     } else {
-      trimmedName = trimmedName.concat("District");
+      // Do not append "District" if it's not necessary
+      trimmedName = trimmedName.trim();
     }
 
+    // Keep spaces within the church names
     const trimmedChurchNames = churchNames.map((churchName) =>
-      churchName.replace(/\s+/g, "")
-    );
+      churchName.trim()
+    ); // Only trim spaces around, not inside
 
     // Prepare data including image URLs
     const data = { name: trimmedName };

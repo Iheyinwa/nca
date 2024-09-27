@@ -1,4 +1,4 @@
-import Logo from "../Assets/Images/NCA_LOGO.png";
+import Logo from "../Assets/Images/onecross.jpg";
 import { NavLink, Outlet, Link } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
 import { FaTimes } from "react-icons/fa";
@@ -44,8 +44,8 @@ export default function Root() {
               <img
                 src={Logo}
                 alt="NCA"
-                width={100}
-                height={100}
+                width={200}
+                height={200}
                 className="rounded-full w-full h-full object-cover"
               />
             </div>

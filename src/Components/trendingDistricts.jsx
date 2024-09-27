@@ -6,7 +6,6 @@ import { Spin } from "antd";
 import PropTypes from "prop-types";
 import HomeButton from "./homeButton";
 
-
 const TrendingDistricts = ({ dataAos, dataAosDuration, dataAosDelay }) => {
   const [trendingDistricts, setTrendingDistricts] = useState([]);
   const [viewMore, setViewMore] = useState(false);
@@ -113,13 +112,13 @@ const TrendingDistricts = ({ dataAos, dataAosDuration, dataAosDelay }) => {
                     outline: "2px solid white",
                   }}
                 >
-                  <p className="font-bold text-2xl font-poppins">
+                  <p className="font-bold text-2xl text-center font-poppins">
                     {district.districtName}
                   </p>
-                  <p className="font-medium text-xl font-poppins">
+                  <p className="font-medium text-xl text-center font-poppins">
                     {district.churchName}
                   </p>
-                  <p className="font-medium text-xl font-poppins">
+                  <p className="font-medium text-xl text-center font-poppins">
                     {district.votes} votes
                   </p>
                 </div>
@@ -149,8 +148,8 @@ const TrendingDistricts = ({ dataAos, dataAosDuration, dataAosDelay }) => {
 };
 
 TrendingDistricts.propTypes = {
-    dataAos: PropTypes.string,
-    dataAosDuration: PropTypes.string,
-    dataAosDelay: PropTypes.string,
-}
+  dataAos: PropTypes.string,
+  dataAosDuration: PropTypes.string,
+  dataAosDelay: PropTypes.string,
+};
 export default TrendingDistricts;

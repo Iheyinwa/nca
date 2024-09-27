@@ -4,7 +4,7 @@ const AdminFooter = () => {
       <div className="relative top-20 w-full">
         <div className="w-full h-[1px] my-2 bg-gray-400"></div>
         <p className="font-poppins text-center">
-          &copy; Assemblies of God South West Zone
+          &copy; OneCross Music Ministry
         </p>
       </div>
     </footer>

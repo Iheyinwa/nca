@@ -4,14 +4,14 @@ import HomeButton from "./homeButton";
 const HomeHero = () => {
   return (
     <section className="flex lg:flex-row flex-col justify-center items-center gap-4 p-4 hero mx-4 lg:mx-auto h-full">
-      <div className="flex justify-between gap-4 flex-col lg:flex-row items-center lg:w-[85%] h-full">
+      <div className="flex justify-between gap-4 flex-col xl:flex-row items-center lg:w-[85%] h-full">
         <section className="w-full flex justify-start flex-col gap-4">
-          <p className="text-6xl md:text-8xl font-extrabold font-dmSerif tracking-wider">
+          <p className="text-5xl md:text-8xl font-extrabold font-dmSerif md:tracking-wider">
             General
           </p>
           <div className="relative inline-block w-fit">
-            <p className="text-6xl md:text-8xl font-extrabold font-dmSerif tracking-wider">
-              SuperIntendent
+            <p className="text-5xl md:text-8xl font-extrabold font-dmSerif md:tracking-wider ">
+              Superintendent
             </p>
             <div
               className="absolute bottom-0 left-0 right-0 h-1 bg-[#D77709]"
@@ -20,7 +20,7 @@ const HomeHero = () => {
               }}
             ></div>
           </div>
-          <p className="text-6xl md:text-8xl font-extrabold font-dmSerif tracking-wider relative inline-block w-fit">
+          <p className="text-5xl md:text-8xl font-extrabold font-dmSerif tracking-wider relative inline-block w-fit">
             Trophy
           </p>
           {/* <p className="text-xl font-poppins tracking-wider">
