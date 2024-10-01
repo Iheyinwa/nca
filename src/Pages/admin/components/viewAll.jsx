@@ -16,7 +16,7 @@ const ViewAll = () => {
       let allData = [];
 
       for (const districtDoc of districtSnap.docs) {
-        const districtName = districtDoc.id.replace(/\s+/g, "");
+        const districtName = districtDoc.id;
         const churchesRef = collection(
           db,
           `districtData/${districtName}/churches`

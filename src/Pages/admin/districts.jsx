@@ -6,22 +6,15 @@ import { db } from "../../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { storage } from "../../firebase";
-import {
-  ref,
-  uploadBytes,
-  getDownloadURL,
-  deleteObject,
-} from "firebase/storage";
-import { v4 } from "uuid";
+import axios from "axios";
 
 const Districts = () => {
   const [name, setName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const [churchNames, setChurchNames] = useState([""]);
   const [imageUploads, setImageUploads] = useState([null]); // Array to store image uploads for each church
   const [imageUrls, setImageUrls] = useState([""]); // Array to store image URLs for each church
-  const [imageRefPaths, setImageRefPaths] = useState([""]); // Array to store image reference paths for each church
 
   const handleChurchNameChange = (index, event) => {
     const newChurchNames = [...churchNames];
@@ -33,7 +26,6 @@ const Districts = () => {
     setChurchNames([...churchNames, ""]);
     setImageUploads([...imageUploads, null]);
     setImageUrls([...imageUrls, ""]);
-    setImageRefPaths([...imageRefPaths, ""]);
   };
 
   const handleDeleteChurch = (index) => {
@@ -49,84 +41,53 @@ const Districts = () => {
     newImageUrls.splice(index, 1);
     setImageUrls(newImageUrls);
 
-    const newImageRefPaths = [...imageRefPaths];
-    newImageRefPaths.splice(index, 1);
-    setImageRefPaths(newImageRefPaths);
-
-    // Perform Firebase operations if necessary
-    if (imageRefPaths[index]) {
-      const imageRef = ref(storage, imageRefPaths[index]);
-
-      deleteObject(imageRef)
-        .then(() => {
-          console.log("Image deleted successfully from Firebase Storage.");
-          toast.success("Church and associated image deleted successfully!", {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "light",
-          });
-        })
-        .catch((error) => {
-          console.error("Failed to delete image from Firebase Storage:", error);
-          toast.error("Failed to delete image!", {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "light",
-          });
-        });
-    }
+    // Handle image deletion in Cloudinary if necessary
+    // You can use Cloudinary's API to delete images if required
   };
 
-  const uploadImage = (index) => {
+  const uploadImage = async (index) => {
     if (imageUploads[index] == null) return;
+    const uploadPreset = import.meta.env.VITE_UPLOAD_PRESET;
+    const cloudName = import.meta.env.VITE_CLOUD_NAME;
 
-    const imageRef = ref(storage, `${imageUploads[index].name + v4()}`);
-    uploadBytes(imageRef, imageUploads[index])
-      .then(() => {
-        getDownloadURL(imageRef)
-          .then((url) => {
-            const newImageUrls = [...imageUrls];
-            newImageUrls[index] = url;
-            setImageUrls(newImageUrls);
+    const formData = new FormData();
+    formData.append("file", imageUploads[index]);
+    formData.append("upload_preset", uploadPreset);
+    formData.append("cloud_name", cloudName); // Replace with your Cloudinary cloud name
+    setIsUploading(true);
+    try {
+      const response = await axios.post(
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, // Replace with your Cloudinary API URL
+        formData
+      );
 
-            const newImageRefPaths = [...imageRefPaths];
-            newImageRefPaths[index] = imageRef.fullPath;
-            setImageRefPaths(newImageRefPaths);
+      const newImageUrls = [...imageUrls];
+      newImageUrls[index] = response.data.secure_url; // Use the secure URL from Cloudinary response
+      setImageUrls(newImageUrls);
 
-            toast.success("Image uploaded successfully!", {
-              position: "top-center",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              theme: "light",
-            });
-          })
-          .catch((error) => {
-            console.error("Failed to retrieve image URL:", error);
-          });
-      })
-      .catch((error) => {
-        console.error("Image upload failed:", error);
-        toast.error("Failed to upload image!", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          theme: "light",
-        });
+      toast.success("Image uploaded successfully!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "light",
       });
+    } catch (error) {
+      console.error("Image upload failed:", error);
+      toast.error("Failed to upload image!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "light",
+      });
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   const changeImage = (index) => {
@@ -139,68 +100,22 @@ const Districts = () => {
     setImageUploads(newImageUploads);
   };
 
-  const deleteImage = (index) => {
-    if (imageRefPaths[index]) {
-      const imageRef = ref(storage, imageRefPaths[index]);
-      deleteObject(imageRef)
-        .then(() => {
-          const newImageUrls = [...imageUrls];
-          newImageUrls[index] = "";
-          setImageUrls(newImageUrls);
-
-          const newImageUploads = [...imageUploads];
-          newImageUploads[index] = null;
-          setImageUploads(newImageUploads);
-
-          const newImageRefPaths = [...imageRefPaths];
-          newImageRefPaths[index] = "";
-          setImageRefPaths(newImageRefPaths);
-
-          toast.success("Image deleted successfully!", {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "light",
-          });
-        })
-        .catch((error) => {
-          console.error("Failed to delete image:", error);
-          toast.error("Failed to delete image!", {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "light",
-          });
-        });
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Ensure spaces are retained in the name
     let trimmedName = name.trim(); // Just trim extra spaces around, not inside
 
     const districtRegex = /district/i;
     if (districtRegex.test(trimmedName)) {
-      // Only replace 'district' if it exists, to maintain case consistency
       trimmedName = trimmedName.replace(districtRegex, "District");
     } else {
-      // Do not append "District" if it's not necessary
       trimmedName = trimmedName.trim();
     }
 
-    // Keep spaces within the church names
     const trimmedChurchNames = churchNames.map((churchName) =>
       churchName.trim()
-    ); // Only trim spaces around, not inside
+    );
 
     // Prepare data including image URLs
     const data = { name: trimmedName };
@@ -225,7 +140,6 @@ const Districts = () => {
       setChurchNames([""]);
       setImageUploads([null]);
       setImageUrls([""]);
-      setImageRefPaths([""]);
       setIsSubmitting(false);
       toast.success("Update Successful!", {
         position: "top-center",
@@ -285,13 +199,6 @@ const Districts = () => {
                       >
                         Change Image
                       </button>
-                      <button
-                        type="button"
-                        className="bg-red-600 text-white text-sm py-2 px-3 rounded-sm shadow-md font-poppins"
-                        onClick={() => deleteImage(index)}
-                      >
-                        Delete Image
-                      </button>
                     </div>
                   </div>
                 ) : (
@@ -314,7 +221,7 @@ const Districts = () => {
                         className="bg-blue-500 text-white py-2 px-3 rounded-md shadow-md font-poppins"
                         onClick={() => uploadImage(index)}
                       >
-                        {isSubmitting ? (
+                        {isUploading ? (
                           <FaSpinner className="animate-spin" />
                         ) : (
                           "Upload Image"
@@ -357,11 +264,7 @@ const Districts = () => {
 
         <div className="flex justify-end">
           <button className="bg-green-600 border-green-600 text-white py-2 px-4 rounded text-xl font-poppins">
-            {isSubmitting ? (
-              <FaSpinner color="white" className="animate-spin" />
-            ) : (
-              "Submit"
-            )}
+            {isSubmitting ? <FaSpinner className="animate-spin" /> : "Submit"}
           </button>
         </div>
       </form>

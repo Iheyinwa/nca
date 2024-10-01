@@ -27,7 +27,7 @@ const Vote = () => {
 
           if (!churchNamesSnap.empty) {
             // Check if the churches subcollection has any documents
-            const formattedName = doc.id.replace(/District$/, " District");
+            const formattedName = doc.id;
             districtOption.push(formattedName);
           }
         }
@@ -43,7 +43,6 @@ const Vote = () => {
       }
     };
 
-
     getDistrictList();
   }, []);
 
@@ -52,19 +51,20 @@ const Vote = () => {
     try {
       const churchNamesRef = collection(
         db,
-        `districtData/${selectedOption.value.replace(/\s+/g, "")}/churches`
+        `districtData/${selectedOption.value}/churches`
       );
       const churchNames = await getDocs(churchNamesRef);
 
-       const churchOptionsArray = churchNames.docs.map((churchDoc) => {
-         const data = churchDoc.data();
-         return {
-           church: churchDoc.id,
-           ...data,
-         };
-       });
+      const churchOptionsArray = churchNames.docs.map((churchDoc) => {
+        const data = churchDoc.data();
+        return {
+          church: churchDoc.id,
+          ...data,
+        };
+      });
 
-       setChurchOptions(churchOptionsArray);
+      setChurchOptions(churchOptionsArray);
+      console.log("Church Options:", churchOptionsArray);
 
       console.log(churchOptionsArray);
     } catch (e) {
