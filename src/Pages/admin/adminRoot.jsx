@@ -15,7 +15,7 @@ export default function AdminRoot() {
 
   const handleClose = () => setShowMenu(false);
   const handleImageClick = () => {
-    navigate("/"); // Route to home page when image is clicked
+    navigate("/"); // Route to home
   };
 
   const links = [
