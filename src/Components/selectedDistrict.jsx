@@ -13,7 +13,6 @@ const SelectedDistrict = ({ text, churches }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [selectedDistrictIndex, setSelectedDistrictIndex] = useState(null);
-  const [, setFormData] = useState({});
   const navigate = useNavigate();
 
   console.log(churches);
@@ -44,24 +43,11 @@ const SelectedDistrict = ({ text, churches }) => {
   };
 
   const onSubmit = async (data) => {
-    const formData = {
-      amount: data.amount,
-      votes: data.amount / 50,
-      church: churches[selectedDistrictIndex].name, // Access the name property of the selected church
-    };
-
-    setFormData(formData);
-    console.log(`Data: ${JSON.stringify(formData)}`);
-
     const paystackKey = import.meta.env.VITE_PUBLIC_KEY;
     const paystack = new PaystackPop();
     setShowPopup(false);
 
-    const cleanedText = text.replace(/\s+/g, "");
-    const cleanedChurchName = churches[selectedDistrictIndex].name.replace(
-      /\s+/g,
-      ""
-    );
+    const cleanedChurchName = churches[selectedDistrictIndex].name;
 
     paystack.newTransaction({
       key: paystackKey,
@@ -73,26 +59,19 @@ const SelectedDistrict = ({ text, churches }) => {
 
         // Update Firebase
         try {
-          const districtRef = doc(db, "districtData", cleanedText);
+          const districtRef = doc(db, "districtData", text);
           const churchRef = doc(districtRef, "churches", cleanedChurchName);
 
-          // Create or update the district document
-          await setDoc(districtRef, {}, { merge: true });
-
-          // Update or create the church document
           await setDoc(
             churchRef,
             {
-              name: cleanedChurchName, // Include name in the document
               amount: increment(data.amount),
               votes: increment(data.amount / 100),
             },
             { merge: true }
           );
 
-          console.log(
-            `Updated ${cleanedChurchName} in ${cleanedText} district`
-          );
+          console.log(`Updated ${cleanedChurchName} in ${text} district`);
         } catch (e) {
           console.error("Error updating information: ", e);
         }
