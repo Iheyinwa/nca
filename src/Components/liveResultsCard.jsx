@@ -12,8 +12,7 @@ const LiveResultsCard = ({ text }) => {
   useEffect(() => {
     const getVotes = async () => {
       try {
-        const cleanedText = text.replace(/\s+/g, "");
-        const districtRef = doc(db, "districtData", cleanedText);
+        const districtRef = doc(db, "districtData", text);
         const churchCollectionRef = collection(districtRef, "churches");
 
         const churchSnapshot = await getDocs(churchCollectionRef);
@@ -65,9 +64,7 @@ const LiveResultsCard = ({ text }) => {
       ) : (
         <div
           className={`grid gap-4 ${
-            newDistricts.length > 1
-              ? "grid-cols-2"
-              : "grid-cols-1"
+            newDistricts.length > 1 ? "grid-cols-2" : "grid-cols-1"
           }`}
         >
           {newDistricts.map((district, index) => (
@@ -83,7 +80,7 @@ const LiveResultsCard = ({ text }) => {
                   data-aos-duration="700"
                   data-aos-delay="50"
                 >
-                  <div className="w-[80%] md:w-[50%] flex flex-col justify-center items-center gap-3">
+                  <div className="w-[80%] flex flex-col items-center gap-3">
                     <p className="font-semibold text-xl md:text-[40px] text-center md:leading-[65px] font-poppins">
                       {district.church}
                     </p>

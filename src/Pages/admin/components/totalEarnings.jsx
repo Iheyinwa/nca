@@ -15,7 +15,7 @@ const TotalEarnings = () => {
       let total = 0;
 
       for (const districtDoc of districtSnap.docs) {
-        const districtName = districtDoc.id.replace(/\s+/g, "");
+        const districtName = districtDoc.id;
         const churchesRef = collection(
           db,
           `districtData/${districtName}/churches`
@@ -39,15 +39,15 @@ const TotalEarnings = () => {
   }, []);
 
   return (
-      <section className="flex m-4 p-4 justify-between gap-4 items-center ">
-        <div className="shadow-md rounded-md w-full h-64 flex flex-col justify-center items-start p-4">
-          <p className="font-bold text-3xl font-dmSerif tracking-wider py-2">
-            Total Earnings
-          </p>
-          <p className="font-medium text-xl font-poppins">
-            ₦ {totalEarnings.toLocaleString()}
-          </p>
-        </div>
+    <section className="flex m-4 p-4 justify-between gap-4 items-center ">
+      <div className="shadow-md rounded-md w-full h-64 flex flex-col justify-center items-start p-4">
+        <p className="font-bold text-3xl font-dmSerif tracking-wider py-2">
+          Total Earnings
+        </p>
+        <p className="font-medium text-xl font-poppins">
+          ₦ {totalEarnings.toLocaleString()}
+        </p>
+      </div>
     </section>
   );
 };

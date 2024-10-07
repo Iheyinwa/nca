@@ -71,7 +71,7 @@ const SelectedDistrict = ({ text, churches }) => {
             { merge: true }
           );
 
-          console.log(`Updated ${cleanedChurchName} in ${text} district`);
+          console.log(`Updated ${cleanedChurchName} in ${text}`);
         } catch (e) {
           console.error("Error updating information: ", e);
         }

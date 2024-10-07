@@ -1,9 +1,9 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import Select from "react-select";
 import LiveResultsCard from "../Components/liveResultsCard";
 import { customStyles } from "../Data/data";
 import { db } from "../firebase";
-import { collection, getDocs} from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 const LiveResults = () => {
   const [districtOptions, setDistrictOptions] = useState([]);
@@ -25,7 +25,7 @@ const LiveResults = () => {
 
           if (!churchNamesSnap.empty) {
             // Check if the churches subcollection has any documents
-            const formattedName = doc.id.replace(/District$/, " District");
+            const formattedName = doc.id.replace(/District$/, "District");
             districtOption.push(formattedName);
           }
         }
@@ -43,7 +43,7 @@ const LiveResults = () => {
 
     getDistrictList();
   }, []);
-  
+
   const handleChange = (selectedOption) => {
     setSelectedOption(selectedOption);
   };
