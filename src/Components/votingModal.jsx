@@ -6,12 +6,18 @@ import { useState } from "react";
 const VotingModal = ({ onSubmit, handlePopupCancel }) => {
   const [email, setEmail] = useState("");
   const [amount, setAmount] = useState("");
+  const [error, setError] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = { email, amount };
     console.log(data);
-    onSubmit(data);
+    if (data.amount % 100 != 0) {
+      setError(true);
+    } else {
+      setError(false);
+      onSubmit(data);
+    }
   };
 
   return (
@@ -47,6 +53,11 @@ const VotingModal = ({ onSubmit, handlePopupCancel }) => {
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
           />
+          {error && (
+            <p className="text-red-600 font-semibold font-poppins">
+              Please enter an amount that is a multiple of 100 eg. 100, 200
+            </p>
+          )}
         </div>
         <button
           className="bg-[#000] text-white font-semibold py-3 px-4 rounded relative overflow-hidden text-xl w-[100px] h-[40px] self-end font-poppins flex justify-center items-center gap-2 z-[1] blackButtons"
