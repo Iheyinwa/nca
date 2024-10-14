@@ -3,6 +3,7 @@ import { NavLink, Outlet, Link } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
 import { FaTimes } from "react-icons/fa";
 import { useState } from "react";
+import { Toaster } from "react-hot-toast";
 
 export default function Root() {
   const links = [
@@ -106,6 +107,7 @@ export default function Root() {
         )}
       </div>
       <Outlet />
+      <Toaster />
     </section>
   );
 }

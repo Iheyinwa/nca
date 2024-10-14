@@ -8,6 +8,7 @@ import PaystackPop from "@paystack/inline-js";
 import { useNavigate } from "react-router-dom";
 import { db } from "../firebase"; // Assuming you have your Firebase setup here
 import { doc, setDoc, increment } from "firebase/firestore";
+import toast from "react-hot-toast";
 
 const SelectedDistrict = ({ text, churches }) => {
   const [showPopup, setShowPopup] = useState(false);
@@ -25,6 +26,24 @@ const SelectedDistrict = ({ text, churches }) => {
 
   const handlePopupCancel = () => {
     setShowPopup(false);
+  };
+
+  const customToast = () => {
+    toast.custom(
+      <div
+        style={{
+          fontSize: "17px",
+          border: "1px solid #E9D502",
+          padding: "16px",
+          color: "#0065FE",
+          backgroundColor: "#FFF",
+          boxShadow: "inherit",
+          borderRadius: "10px",
+        }}
+      >
+        Your transaction was cancelled
+      </div>
+    );
   };
 
   const handleSuccessYes = () => {
@@ -53,10 +72,22 @@ const SelectedDistrict = ({ text, churches }) => {
       key: paystackKey,
       email: data.email,
       amount: data.amount * 100,
+      metadata: {
+        custom_fields: [
+          {
+            display_name: "Group Name",
+            variable_name: "group_name",
+            value: cleanedChurchName, // or use `data.customerName` if the name is entered by the user
+          },
+        ],
+      },
+
       onSuccess: async (transaction) => {
         console.log(`Payment successful reference ${transaction.reference}`);
         setShowSuccess(true);
-
+        toast.success(
+          `Payment Successful and ${cleanedChurchName} vote updated`
+        );
         // Update Firebase
         try {
           const districtRef = doc(db, "districtData", text);
@@ -74,10 +105,12 @@ const SelectedDistrict = ({ text, churches }) => {
           console.log(`Updated ${cleanedChurchName} in ${text}`);
         } catch (e) {
           console.error("Error updating information: ", e);
+          toast.error(`Payment was not successful`);
         }
       },
       onCancel: () => {
         console.log("Transaction was not completed");
+        customToast();
         setShowSuccess(false);
       },
     });

@@ -1,18 +1,17 @@
-import { useEffect } from 'react';
-import HomeHero from './Components/homehero'
-import Steps from './Components/steps'
-import TrendingDistricts from './Components/trendingDistricts';
+import { useEffect } from "react";
+import HomeHero from "./Components/homehero";
+import Steps from "./Components/steps";
+import TrendingDistricts from "./Components/trendingDistricts";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Footer from './Components/footer';
+import Footer from "./Components/footer";
 
 function App() {
-
-  useEffect(()=>{
-     AOS.init({
-       duration: 200,
-     });
-  })
+  useEffect(() => {
+    AOS.init({
+      duration: 200,
+    });
+  });
 
   return (
     <>
@@ -42,4 +41,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
